@@ -1,23 +1,127 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '*',
+      redirect: '/'
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/',
+      name: 'Layout',
+      component: () => import('./views/front/Layout.vue'),
+      children:
+      [
+        {
+          path: '/',
+          name: 'Home',
+          component: () => import('./views/front/Home.vue')
+        },
+        {
+          path: 'list',
+          name: 'List',
+          component: () => import('./views/front/List.vue')
+        },
+        {
+          path: 'item_page/:itemID',
+          name: 'ItemPage',
+          component: () => import('./views/front/ItemPage.vue')
+        },
+        {
+          path: 'cart',
+          name: 'Cart',
+          component: () => import('./views/front/Cart.vue')
+        },
+        {
+          path: 'cart_address',
+          name: 'CartAddress',
+          component: () => import('./views/front/CartAddress.vue')
+        },
+        {
+          path: 'cart_pay/:orderID',
+          name: 'CartPay',
+          component: () => import('./views/front/CartPay.vue')
+        },
+        {
+          path: 'cart_fin',
+          name: 'CartFin',
+          component: () => import('./views/front/CartFin.vue')
+        },
+        {
+          path: 'bulletin',
+          name: 'Bulletin',
+          component: () => import('./views/front/Bulletin.vue')
+        },
+        {
+          path: 'class',
+          name: 'Class',
+          component: () => import('./views/front/Class.vue')
+        }
+      ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('./views/front/Login.vue')
+    },
+    {
+      path: '/controller',
+      name: 'Controller',
+      component: () => import('./views/front/Controller.vue')
+    },
+    {
+      path: '/admin',
+      name: 'Dashboard',
+      component: () => import('./components/Dashboard.vue'),
+      children:
+      [
+        {
+          path: 'products',
+          name: 'Products',
+          component: () => import('./views/back/Products.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'orders',
+          name: 'Orders',
+          component: () => import('./views/back/Orders.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'coupon',
+          name: 'Coupon',
+          component: () => import('./views/back/Coupon.vue'),
+          meta: { requiresAuth: true }
+        }
+      ]
+    },
+    {
+      path: '/',
+      name: 'Dashboard',
+      component: () => import('./components/Dashboard.vue'),
+      children:
+      [
+        {
+          path: 'customer_order',
+          name: 'CustomerOrder',
+          component: () => import('./views/back/CustomerOrders.vue')
+        },
+        {
+          path: 'customer_checkout/:orderID',
+          name: 'CustomerCheckout',
+          component: () => import('./views/back/CustomerCheckout.vue')
+        }
+      ]
     }
   ]
 })
