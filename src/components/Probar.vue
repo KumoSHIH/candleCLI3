@@ -1,27 +1,25 @@
 <template>
     <div>
-        <ul class="nav proNav d-md-flex justify-content-end align-items-center d-none d-md-block">   
+        <ul class="nav proNav d-md-flex justify-content-end align-items-center d-none d-md-block">
             <li class="nav-item ">
                 <router-link class="nav-link" to="/list">全部商品</router-link>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link" @click.prevent="goItem('新品上市')">新品上市</a>
-                <!-- <router-link class="nav-link" to="/list">新品上市</router-link> -->
+                <a href="#" class="nav-link" @click.prevent="goItem('大豆蠟燭')">大豆蠟燭</a>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/list">大豆蠟燭</router-link>
+                <a href="#" class="nav-link" @click.prevent="goItem('果凍蠟燭')">果凍蠟燭</a>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/list">水晶蠟燭</router-link>
+                <a href="#" class="nav-link" @click.prevent="goItem('創意蠟燭')">創意蠟燭</a>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/list">創意蠟燭</router-link>
+                <a href="#" class="nav-link" @click.prevent="goItem('香氛蠟燭')">香氛蠟燭</a>
             </li>
             <li class="nav-item mr-4">
-                <router-link class="nav-link" to="/list">香氛蠟燭</router-link>
+                <a href="#" class="nav-link" @click.prevent="goItem('新品上市')">新品上市</a>
             </li>
         </ul>
-
         <div class="humbuger row d-md-none no-gutters">
             <nav class="col-12 navbar navbar-dark bg-dark" data-toggle="collapse" data-target="#navbarToggle">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
@@ -33,24 +31,22 @@
                     <router-link class="nav-link" to="/list">全部商品</router-link>
                 </li>
                 <li class="nav-item bg-second">
-                    <router-link class="nav-link" to="/list">新品上市</router-link>
+                    <a href="#" class="nav-link" @click.prevent="goItem('大豆蠟燭')">大豆蠟燭</a>
                 </li>
                 <li class="nav-item bg-second">
-                    <router-link class="nav-link" to="/list">大豆蠟燭</router-link>
+                    <a href="#" class="nav-link" @click.prevent="goItem('果凍蠟燭')">果凍蠟燭</a>
                 </li>
                 <li class="nav-item bg-second">
-                    <router-link class="nav-link" to="/list">水晶蠟燭</router-link>
+                    <a href="#" class="nav-link" @click.prevent="goItem('創意蠟燭')">創意蠟燭</a>
                 </li>
                 <li class="nav-item bg-second">
-                    <router-link class="nav-link" to="/list">創意蠟燭</router-link>
+                    <a href="#" class="nav-link" @click.prevent="goItem('香氛蠟燭')">香氛蠟燭</a>
                 </li>
                 <li class="nav-item bg-second">
-                    <router-link class="nav-link" to="/list">香氛蠟燭</router-link>
+                    <a href="#" class="nav-link" @click.prevent="goItem('新品上市')">新品上市</a>
                 </li>
             </div>
-            
-        </div>  
-        
+        </div>
     </div>
 </template>
 
@@ -72,7 +68,6 @@
             width: 120px;
             height: 30px;
             text-align: center;
-            
             color: #fff;
             transition: .2s;
         }
@@ -86,11 +81,9 @@
             position: relative;
             top: 5px;
             transition: .3s;
-            
         }
         .nav-link:hover::after{
             width: 100%;
-            
         }
     }
     .navHide{
@@ -118,26 +111,18 @@
             }
         }
     }
-    
 </style>
-
 <script>
 export default {
-    data(){
-        return{
-            products: [],
-            listItem: '',
-            filterData: {},
+    data () {
+        return {
         }
     },
     methods: {
-        goItem(name){
-            const vm = this;
-            //vm.$bus.$emit('goFilterList',name);
+        goItem (title) {
+            const vm = this
+            vm.$router.push({ path: '/list', query: { category: title } })
         }
-    },
-    created(){
-        //this.getProduct();
-    },
+    }
 }
 </script>

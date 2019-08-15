@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card h-100 border-0 mb-3">
-            <div class="img-top" 
+            <div class="img-top"
             @click="itemPage(cardItem.id)"
             :style="{ backgroundImage: `url(${cardItem.imageUrl})` }"><div class="mask"></div></div>
             <div class="card-body">
@@ -30,9 +30,8 @@
         background-position: center center;
         cursor: pointer;
         position: relative;
-        overflow: hidden; 
+        overflow: hidden;
     }
-    
     .img-top:hover .mask{
         top: 0;
         &:after{
@@ -45,14 +44,14 @@
             border: solid 2px #fff;
             padding: 5px 10px;
         }
-    }   
+    }
     .mask{
         position: absolute;
         top: 150px;
         left: 0;
         width: 100%;
-        height: 150px; 
-        background-color: rgba(0,0,0,.5); 
+        height: 150px;
+        background-color: rgba(0,0,0,.5);
         transition: .3s;
     }
     .card-footer{
@@ -75,38 +74,19 @@
             background-color: #eb5f5d;
         }
     }
-    
 </style>
 
 <script>
 export default {
     props: ['cardItem'],
-    data(){
-        return{
-            cartDetail : [],
+    methods: {
+        addCart (id, qty = 1) {
+            this.$store.dispatch('cartModules/addCart', { id, qty })
+        },
+        itemPage (id) {
+            const vm = this
+            vm.$router.push(`item_page/${id}`)
         }
-    },
-    methods:{
-        addCart(id, qty = 1){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            const cart = {
-                product_id : id,
-                qty,
-            };
-            // vm.isLoading = true;
-            vm.$http.post(api, {data:cart}).then((response)=>{
-                vm.cartDetail = response.data.data;
-                //console.log(vm.cartDetail);
-                // vm.$bus.$emit('updateCart');
-                // vm.$bus.$emit('message:push', '已加入購物車', 'success');
-                // vm.isLoading = false;
-            })
-        },
-        itemPage(id){
-            const vm = this;
-            vm.$router.push(`item_page/${id}`);
-        },
-    },
+    }
 }
 </script>

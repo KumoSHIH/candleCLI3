@@ -296,14 +296,16 @@
 //hero3
 .handMadeWrap{
     height: 600px;
-    background: url(./assets/images/p5.jpg) ;
+    background: url(./assets/images/p5.jpg);
     background-size: cover;
     background-position: center center;
     overflow: hidden;
     .bntHand{
-        height: 60px;
+        height: 50px;
         box-shadow: 0px 3px 5px rgba(0,0,0,.3);
-        margin-top: 50%;
+        margin-top: 50px;
+        margin-left: 45%;
+        transform: translateX(-45%);
 
         color: #fff;
         font-weight: bold;
@@ -314,25 +316,67 @@
         font-weight: bold;
         letter-spacing: 2px;
         padding: 10px;
-        margin-top: 10px;
+        margin-top: 120px;
     }
     p:first-letter{
         font-size: 28px;
     }
-}    
+    ul,li{
+        list-style: none;
+    }
+    h3{
+        border: solid 2px #574f7d;
+        display: inline-flex;
+        padding: 10px 15px;
+        font-weight: bold;
+        text-shadow: 0px 3px 5px rgba(0,0,0,.3);
+    }
+    #blip{
+        position: absolute;
+        top: 80px;
+        opacity: 0;
+        width: 60%;
+        transform: translateY(-800px);
+        li{
+            letter-spacing: 1.5px;
+            text-shadow: 0px 3px 5px rgba(0,0,0,.3);
+        }
+        ul{
+            background-color: rgba(149, 173, 190, .7);
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+    }
+}
+
 @media (min-width: 420px) and (max-width:768px){
     .handMadeWrap {
         .bntHand{
-            margin-top: 70%;
+            height: 50px; 
+            margin-top: 20px;
+            margin-left: 0;
+        }
+        #blip{
+            top: 10px;
+            width: 100%;
         }
     }
 }
 @media (min-width: 320px) and (max-width:419px){
     .handMadeWrap {
         height: 500px;
+        p{
+            margin-top: 50px;
+        }
         .bntHand{
-            height: 50px;
-            margin-top: 50%;
+            height: 50px; 
+            margin-top: 20px;
+            margin-left: 0;
+        }
+        #blip{
+            top: 30px;
+            width: 100%;
+            transform: translateY(-500px);
         }
     }
 }
@@ -438,3 +482,4 @@
     opacity: 1;
     transform: translateX(0);
 }
+

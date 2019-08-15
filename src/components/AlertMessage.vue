@@ -13,12 +13,13 @@
 </template>
 
 <style lang="scss" scoped>
-  
   .message-alert{
+    position: fixed;
     max-width: 100vw;
     top: 40%;
     right: 50%;
     transform: translate(50%);
+    z-index: 1100;
   }
   .candle-alert{
     width: 300px;
@@ -45,66 +46,48 @@
     color: inherit;
   }
 }
-  
 </style>
 
 <script>
-export default {
-  name: 'Navbar',
-  data() {
+export default ({
+  data () {
     return {
-      messages: [
-        //   {
-        //     message: '訊息內容',
-        //     status: 'danger',
-        //     timestamp: 123,
-        // }
-      ],
-    };
+      messages: []
+    }
   },
   methods: {
-    updateMessage(message, status) {
-      const timestamp = Math.floor(new Date() / 1000);
+    updateMessage (message, status) {
+      const timestamp = Math.floor(new Date() / 1000)
       this.messages.push({
         message,
         status,
-        timestamp,
-      });
-      this.removeMessageWithTiming(timestamp);
+        timestamp
+      })
+      this.removeMessageWithTiming(timestamp)
     },
-    removeMessage(num) {
-      this.messages.splice(num, 1);
+    removeMessage (num) {
+      this.messages.splice(num, 1)
     },
-    removeMessageWithTiming(timestamp) { //5秒後自行移除
-      const vm = this;
+    removeMessageWithTiming (timestamp) { // 5秒後自行移除
+      const vm = this
       setTimeout(() => {
         vm.messages.forEach((item, i) => {
           if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
+            vm.messages.splice(i, 1)
           }
-        });
-      }, 5000);
-    },
+        })
+      }, 5000)
+    }
   },
   created() {
-    const vm = this;
+    const vm = this
     // 自定義名稱 'messsage:push'
     // message: 傳入參數
     // status: 樣式，預設值為 warning
-    // vm.$bus.$on('message:push', (message, status = 'warning') => { //外層用on去註冊
-    //   vm.updateMessage(message, status);
-    // });
-    //vm.$bus.$emit('message:push'); //內層用emit去觸發
-  },
-};
+    vm.$bus.$on('message:push', (message, status = 'warning') => { // 外層用on去註冊
+      vm.updateMessage(message, status)
+    })
+    // vm.$bus.$emit('message:push'); // 內層用emit去觸發
+  }
+})
 </script>
-
-<style scope>
-.message-alert {
-  position: fixed;
-  max-width: 50%;
-  top: 56px;
-  right: 20px;
-  z-index: 1100;
-}
-</style>

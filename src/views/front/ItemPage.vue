@@ -1,10 +1,5 @@
 <template>
     <div>
-        <loading :active.sync="isLoading" :is-full-page="true">
-            <template>
-                <CandleLoading/>
-            </template>
-        </loading>
         <div class="container py-5">
             <div class="row d-flex justify-content-center mt-5">
                 <div class="col-12 col-md-6 col-lg-5" >
@@ -26,7 +21,6 @@
                             在您第一次點燃大豆蠟燭時，請完全使表層的大豆蠟融化。如此一來，不但能夠預防中心點過低也能夠使所有的蠟完全的被燃燒，更可以延長您的蠟燭壽命。
                             請您避免將蠟燭放置在下風處、風扇或冷氣機出風口；風速將會加速蠟燭的燃燒速度，也會縮短您享受大豆蠟燭的時光。
                         </p>
-                        
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-5">
@@ -37,11 +31,9 @@
                     </div>
                     <div class=" mt-3 text-center text-md-left">
                         <span class="h6 bg-text-light text-light border border-text-light py-1 px-2">9折</span><span class="h6 border border-text-light py-1 px-2">結帳金額滿 $999</span>
-                        
                     </div>
                     <div class="mt-3 text-center text-md-left">
                         <span class="h6 bg-text-light text-light border border-text-light py-1 px-2">8折</span><span class="h6 border border-text-light py-1 px-2 ">結帳金額滿 $1399</span>
-                        
                     </div>
                     <div class="mt-4">
                         <label for="num" class="h6">數量</label>
@@ -56,7 +48,7 @@
                     <hr>
                     <p class="text-center text-md-left ">付款後，備貨到寄出商品為 2~6 個工作天。（不包含假日）</p>
                     <p class="text-center text-md-left ">統一發票中獎另會通知並寄送紙本發票</p>
-                    <hr>    
+                    <hr>
                     <div class="text-center text-md-left ">
                         <h5 class="text-info"><strong>優惠活動</strong></h5>
                         <li class="text-text-light"><i class="fas fa-sun mr-2"></i>新加入會員首次購物享95折</li>
@@ -83,12 +75,10 @@
                                 <td>100%大豆蠟，用精油及香氛菁華配製而成。 天然純手工，燃燒時不會產生煙，適合任何空間。</td>
                             </tr>
                         </table>
-                        
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -117,48 +107,29 @@
 
 <script>
 export default {
-    data(){
-        return{
+    data () {
+        return {
             product: {},
-            itemID: '',
-            isLoading: false,
-            status:{  //判斷畫面上是哪一筆資料正在讀取中
-                loadingItem:'',
-            },
-            
+            itemID: ''
         }
     },
     methods: {
-        getItemInfo(id){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response)=>{
-                vm.product = response.data.product;
-                vm.$set(vm.product, "buyNum", 1);
-                vm.isLoading = false;
+        getItemInfo (id) {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+            vm.$http.get(api).then((response) => {
+                vm.product = response.data.product
+                vm.$set(vm.product, 'buyNum', 1)
             })
         },
-        addCart(id,qty=1){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            const cart = {
-                product_id: id,
-                qty,
-            }
-            vm.status.loadingItem = id;
-            vm.$http.post(api,{ data: cart }).then((response)=>{
-                //console.log(response.data);
-                vm.$bus.$emit('updateCart');
-                vm.$bus.$emit('message:push', response.data.message,'success');
-                vm.status.loadingItem = '';
-            })
-        },
+        addCart (id, qty = 1) {
+            this.$store.dispatch('cartModules/addCart', { id, qty })
+        }
     },
-    created(){
-        const vm = this;
-        vm.itemID = vm.$route.params.itemID;//須和路由設置一樣id名稱
-        vm.getItemInfo(vm.itemID);
+    created () {
+        const vm = this
+        vm.itemID = vm.$route.params.itemID // 須和路由設置一樣id名稱
+        vm.getItemInfo(vm.itemID)
     }
 }
 </script>

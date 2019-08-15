@@ -12,7 +12,6 @@
                                 <div class="step1"><i class="fas fa-check success"></i></div>
                             </div>
                         </div>
-
                         <div class="col text-center mt-4">
                             <h4 class="text-main">感謝您的購買！<br>商品將會在2~6個工作天內送達！</h4>
                             <router-link to="/">
@@ -21,15 +20,10 @@
                         </div>
                     </div>
                 </div>
-                
-                
             </div>
-            
-            
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped>
     .finBanner{
@@ -57,7 +51,7 @@
         .wrap{
             top: 25%;
             width: 80%;
-        } 
+        }
     }
     @media (min-width: 767px){
         .finBanner{
@@ -66,6 +60,6 @@
         }
         .wrap{
             top: 25%;
-        } 
+        }
     }
 </style>

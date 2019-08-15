@@ -11,19 +11,16 @@
 </template>
 
 <script>
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import Alert from '@/components/AlertMessage';
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 export default {
-    components:{
+    components: {
         Nav,
-        Footer,
-        Alert
+        Footer
     },
     computed: {
         ...mapGetters(['isLoading'])
     }
-}
-</script>
+}</script>

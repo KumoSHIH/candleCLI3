@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="cartWrap container pt-5"> 
+        <div class="cartWrap container pt-5">
             <div class="row no-gutters">
                 <div class="col-md-8 mt-5 no-gutters pr-md-4">
                     <h3 class="text-center text-main bg-text-main py-2 mb-4 mt-4 mt-md-0">我的購物車</h3>
@@ -10,9 +10,9 @@
                         <th width="30%" class="align-middle ml-2">{{item.product.title}}
                             <div class="text-success" v-if="item.coupon">已套用優惠券</div>
                         </th>
-                        <th width="10%">{{item.qty}}{{item.product.unit}}</th> 
+                        <th width="10%">{{item.qty}}{{item.product.unit}}</th>
                         <th width="20%" >
-                            <div :class="{'delLine': item.coupon}">NT{{(item.product.price)*(item.qty) | currency}}</div> 
+                            <div :class="{'delLine': item.coupon}">NT{{(item.product.price)*(item.qty) | currency}}</div>
                             <div class="text-danger" v-if="item.coupon">NT{{ item.final_total | currency }}</div>
                         </th>
                         <th width="5%">
@@ -21,7 +21,6 @@
                             </button>
                         </th>
                     </tr>
-                    
                 </div>
                 <div class="col-md-4 mt-5">
                     <h3 class="text-center bg-main text-light py-2">訂單小計</h3>
@@ -29,7 +28,6 @@
                         <span class="h6">小計</span>
                         <span class="h6">NT{{ cart.total |currency }}</span>
                     </div>
-                    
                     <div class="d-flex justify-content-between px-2" v-if="cart.final_total !== cart.total">
                         <span class="h6 text-danger">優惠券</span>
                         <span class="h6 text-danger">NT{{ cart.final_total |currency }}</span>
@@ -55,7 +53,6 @@
 </template>
 
 <style lang="scss" scoped>
-    
     .cartWrap{
         min-height: calc(100vh - 280px);
     }
@@ -76,56 +73,38 @@
         }
     }
 </style>
-    
 <script>
-import Nav from '../../components/Nav';
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-    components:{
-        Nav,
-    },
-    data(){
-        return{
-            cart:[],
-            coupon_code: '',
+    data () {
+        return {
+            coupon_code: ''
         }
     },
-    methods:{
-        getCart(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            vm.$store.state.isLoading = true;
-            vm.$http.get(api).then((response)=>{
-                //console.log(response.data);
-                vm.cart = response.data.data;
-                //console.log(vm.cart);
-                vm.$bus.$emit('updateCart');
-                vm.$store.state.isLoading = false;
-            })
+    methods: {
+        ...mapActions('cartModules', ['getCart', 'delCart']),
+        delCart (id) {
+            this.$store.dispatch('cartModules/delCart', id)
         },
-        delCart(id){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-            vm.$http.delete(api).then((response)=>{
-                //console.log(response);
-                vm.$bus.$emit('message:push', '已刪除商品', 'danger');
-                vm.$bus.$emit('updateCart');
-                vm.getCart();
-            })
-        },
-        addCoupon(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+        addCoupon () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
             const coupon = {
-                code : vm.coupon_code
+                code: vm.coupon_code
             }
-            vm.$http.post(api, { data: coupon }).then((response)=>{
-                //console.log(response);
-                vm.getCart();
+            vm.$http.post(api, { data: coupon }).then((response) => {
+                // console.log(response);
+                vm.getCart()
             })
-        },
+        }
     },
-    created(){
-        this.getCart();
+    computed: {
+        ...mapGetters('cartModules', ['cart']),
+        ...mapGetters(['isLoading'])
+    },
+    created () {
+        this.$store.dispatch('cartModules/getCart')
     }
 }
 </script>

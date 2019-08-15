@@ -1,6 +1,5 @@
 <template>
     <div>
-        <loading :active.sync="isLoading"></loading>
         <div class="container pt-5">
             <div class="row d-flex justify-content-center mt-5">
                 <div class="col-md-8 text-center ">
@@ -9,11 +8,8 @@
                     <h6 class="text-text-light"><i class="fas fa-sun mr-2"></i>新加入會員首次購物享95折。</h6>
                     <h6 class="text-text-light"><i class="fas fa-sun mr-2"></i>當月壽星結帳可再折扣NT $50。</h6>
                     <h6 class="text-text-light"><i class="fas fa-sun mr-2"></i>結帳額滿指定價格可使用以下優惠券！</h6>
-                    <hr>
                 </div>
-                
             </div>
-            
             <div class="row d-flex justify-content-center mt-3">
                 <div class="col-7 col-md-4 wrap text-center py-2">
                     <div class="dashLine text-center">
@@ -52,7 +48,30 @@
                 </div>
                 <div class="grad"></div>
             </div>
-            
+            <div class="row d-flex justify-content-center my-5">
+                <div class="col-md-8 text-center ">
+                    <h2 class="text-main mt-4 mt-md-0" id="service"><strong>顧客服務</strong></h2>
+                    <hr>
+                    <h6 class="text-text-light">運送方式</h6>
+                    <p>提供超商店到店、郵寄、宅配。</p>
+                    <h6 class="text-text-light">付款方式</h6>
+                    <p>提供線上刷卡、專屬轉帳帳號，暫不提供到貨付款。</p>
+                    <h6 class="text-text-light">會員優惠</h6>
+                    <p>每月都有指定優惠，請定期關注！</p>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center my-5">
+                <div class="col-md-8 text-center ">
+                    <h2 class="text-main mt-4 mt-md-0" id="about"><strong>關於我們</strong></h2>
+                    <hr>
+                    <h6 class="text-text-light">實體店面</h6>
+                    <p>台中市安安區好好路一段111號</p>
+                    <h6 class="text-text-light">一般問題</h6>
+                    <p>提供線上刷卡、專屬轉帳帳號，暫不提供到貨付款。</p>
+                    <h6 class="text-text-light">人才招募</h6>
+                    <p>誠徵門市人員：上班時間 10:00~19:00</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -81,6 +100,5 @@
     rgb(255, 151, 118)
   );
   background-position: 0 7px;
-  
 }
 </style>

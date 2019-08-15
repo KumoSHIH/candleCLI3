@@ -1,8 +1,5 @@
 <template>
     <div>
-        <loading :active.sync="isLoading">
-            <CandleLoading/>
-        </loading>
         <div class="container">
             <div class="row justify-content-center no-gutters">
                 <div class="col-md-7 mt-5">
@@ -35,7 +32,7 @@
                             <td class="text-right">NT {{ order.total | currency }}</td>
                         </tfoot>
                     </table>
-                </div> 
+                </div>
 
                 <div class="col-md-7 mt-5">
                     <h2 class="text-center text-main">付款</h2>
@@ -46,7 +43,6 @@
                             type="text" id="card" class="form-control" placeholder="1234-5678-9012-1234">
                             <span v-if="errors.has('card')" class="text-danger">請輸入正確卡號</span>
                         </div>
-                        
 
                         <div class="form-row">
                             <div class="col-6">
@@ -57,25 +53,22 @@
                                     <span v-if="errors.has('firstName')" class="text-danger mr-2">請輸入姓</span>
                                 </div>
                             </div>
-
                             <div class="col-6 ">
                                 <div class="form-group">
                                     <label for="firstName">持卡人名字</label>
                                     <input v-validate="'required'" name="lastName" :class="{'is-invalid': errors.has('lastName')}"
                                 type="text" class="form-control " placeholder="名">
-                                    <span v-if="errors.has('lastName')" class="text-danger ">請輸入名字</span>    
+                                    <span v-if="errors.has('lastName')" class="text-danger ">請輸入名字</span>
                                 </div>
                             </div>
-                        </div>        
-                            
+                        </div>
                         <div class="form-row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="isAvailable">有效期限</label>
                                     <input v-validate="'required'" name="isAvailable" :class="{'is-invalide': errors.has('isAvailible')}"
-                                    type="month" id="isAvailable" class="form-control" placeholder="年/月"> 
+                                    type="month" id="isAvailable" class="form-control" placeholder="年/月">
                                     <span v-if="errors.has('isAvailable')" class="text-danger">請輸入有效年/月</span>
-
                                 </div>
                             </div>
 
@@ -83,7 +76,7 @@
                                 <div class="form-group">
                                     <label for="last3">背面末三碼</label>
                                     <input v-validate="'required'" name="last3" :class="{'is-invalid': errors.has('last3')}"
-                                    type="text" id="last3" class="form-control" placeholder="123"> 
+                                    type="text" id="last3" class="form-control" placeholder="123">
                                     <span v-if="errors.has('last3')" class="text-danger">請輸入卡片背面末三碼</span>
                                 </div>
                             </div>
@@ -117,9 +110,7 @@
                         </tr>
                     </table>
                 </div>
-                
                 <button class="col-md-7 btn btn-main my-3 mb-5" @click="payOrder">確認付款</button>
-                
             </div>
         </div>
     </div>
@@ -127,52 +118,51 @@
 
 <script>
 export default {
-    data(){
-        return{
+    data () {
+        return {
             order: {
-                user:{},
+                user: {}
             },
-            orderID: '',
-            isLoading: false,
+            orderID: ''
         }
     },
-    methods:{
-        getOrders(id){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response)=>{
-                //console.log(response.data);
-                vm.order = response.data.order;
-                //console.log(vm.order);
-                vm.isLoading = false;
+    methods: {
+        getOrders (id) {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`
+            vm.$store.dispatch('updateLoading', true, { root: true })
+            vm.$http.get(api).then((response) => {
+                // console.log(response.data);
+                vm.order = response.data.order
+                // console.log(vm.order);
+                vm.$store.dispatch('updateLoading', false, { root: true })
             })
         },
-        payOrder(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`;
-            vm.isLoading = true;
+        payOrder () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`
+            vm.$store.dispatch('updateLoading', true, { root: true })
             vm.$validator.validate().then(valid => {
                 if (valid) {
-                    vm.$http.post(api).then((response)=>{
-                        if(response.data.success){
-                            vm.getOrders();
-                            vm.$bus.$emit('updateCart');
-                            vm.$router.push('/cart_fin');
-                            vm.isLoading = false;
+                    vm.$http.post(api).then((response) => {
+                        if (response.data.success) {
+                            vm.getOrders()
+                            vm.$bus.$emit('updateCart')
+                            vm.$router.push('/cart_fin')
+                            vm.$store.dispatch('updateLoading', false, { root: true })
                         }
                     })
-                }else{
-                    vm.isLoading = false;
-                    alert('欄位不完整');
+                } else {
+                    vm.$store.dispatch('updateLoading', false, { root: true })
+                    alert('欄位不完整')
                 }
-            });
+            })
         }
     },
-    created(){
-        //取得ID
-        this.orderID = this.$route.params.orderID;//orderID>對應路由所自訂義的名稱
-        this.getOrders();
-    },
+    created () {
+        // 取得ID
+        this.orderID = this.$route.params.orderID // orderID>對應路由所自訂義的名稱
+        this.getOrders()
+    }
 }
 </script>

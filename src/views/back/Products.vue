@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- Loading 效果 -->   
     <loading :active.sync="isLoading"></loading>
-
     <!-- 產品表格 -->
     <div class="text-right mt-4">
       <div class="btn btn-main" @click="openModal(true)">建立新的產品</div>
@@ -68,9 +66,8 @@
                 </div>
                 <img :src="tempProduct.imageUrl"
                   img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
-                  class="img-fluid" alt>   
+                  class="img-fluid" alt>
               </div>
-              
               <div class="col-sm-8">
                 <div class="form-group">
                   <label for="title">標題</label>
@@ -118,7 +115,7 @@
                 <div class="form-group">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="is_enabled"
-                     v-model="tempProduct.is_enabled"
+                    v-model="tempProduct.is_enabled"
                     :true-value="1" :false-value="0">
                     <label class="form-check-label" for="is_enabled">是否啟用</label>
                   </div>
@@ -157,119 +154,115 @@
             </div>
         </div>
     </div>
-
   </div>
 </template>
 
-
 <script>
-//ESLint 使用 /* global $ */
-import $ from "jquery";
-import Pagination from "../../components/Pagination";
+// ESLint 使用 /* global $ */
+import $ from 'jquery'
+import Pagination from '../../components/Pagination'
 export default {
-  components:{
-    Pagination,    
-  },
-  data() {
-    return {
-      products: [], //儲存新增的資料
-      tempProduct: {}, //productModal要送出的欄位內容
-      isNew: false,
-      isLoading: false, //Loading
-      status: {
-        fileUploading: false,
-      },
-      pagination: {}, 
-    };
-  },
-  methods: {
-    getProducts(page = 1) {
-      //取得遠端資料
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
-      const vm = this;
-      vm.isLoading = true; //loading 效果1
-      this.$http.get(api).then(response => {
-        console.log(response.data);
-        vm.isLoading = false; //取完資料改回false
-        vm.products = response.data.products;
-        vm.pagination = response.data.pagination; //把pagination變數存進來 
-      });
+    components: {
+      Pagination    
     },
-    openModal(isNew, item) { //傳入參數
-      if(isNew){ //打開如果產品是新增時
-          this.tempProduct = {};
-          this.isNew = true;
-      }else{
-          this.tempProduct = Object.assign({}, item); //淺層拷貝傳入的物件
-          this.isNew = false;
-      }
-      $("#productModal").modal("show");
-    },
-    updateProduct(){
-        let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
-        let httpMethod = 'post';
-        const vm = this;
-        if(!vm.isNew){ //假如傳入的不是新的 就改成修改產品的API
-            api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-            httpMethod = 'put';
-        }
-        this.$http[httpMethod](api, {data: vm.tempProduct}).then(response => { //注意資料送出格式
-            console.log(response.data);
-            if(response.data.success){
-                $("#productModal").modal("hide");
-                vm.getProducts();//重新取得遠端資料
-            }else{
-                alert('新增失敗');
-            }
-        });
-    },
-    delModal(item){
-        const vm = this;
-        vm.tempProduct = Object.assign({}, item);
-        $('#delProductModal').modal('show');
-    },
-    delProuduct(){
-        const vm = this;
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        this.$http.delete(api, {data: vm.tempProduct}).then(response => { //注意資料送出格式
-            console.log(response.data);
-            if(response.data.success){
-                $("#delProductModal").modal("hide");
-                vm.getProducts();
-            }else{
-                alert('刪除失敗');
-                $("#delProductModal").modal("hide");
-            }
-        });
-    },
-    uploadFile(){
-      console.log(this);
-      const uploadedFile = this.$refs.files.files[0]; //取出檔案
-      const vm = this;
-      const formData = new FormData();//模擬表單傳送之方法: 新增一空物件
-      formData.append('file-to-upload', uploadedFile); //加入
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      vm.status.fileUploading = true; //loading 效果2
-      this.$http.post(url, formData, { //還要傳物件 因為FormData的格式關係
-        headers:{
-          'Content-type': 'multipart/form-data'  
+    data () {
+      return {
+        products: [],
+        tempProduct: {},
+        isNew: false,
+        isLoading: false,
+        status: {
+          fileUploading: false,
         },
-      }).then((response) => {
-        console.log(response.data);
-        vm.status.fileUploading = false; //AJAX結束改回false
-        if(response.data.success){
-          // vm.tempProduct.imageUrl = response.data.imageUrl;
-          // console.log(vm.tempProduct);
-          vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);//強制寫入欄位
-          this.$bus.$emit('message:push', '圖片上傳成功', 'success');
-        }else{
-          this.$bus.$emit('message:push', response.data.message, 'danger'); //觸發外層的bus
-        }
-      });
+        pagination: {}
+      }
     },
-  },
-  created() {
-    this.getProducts();
-  }
-};
+    methods: {
+      getProducts (page = 1) {
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
+        const vm = this
+        vm.isLoading = true
+        this.$http.get(api).then(response => {
+          // console.log(response.data);
+          vm.isLoading = false
+          vm.products = response.data.products
+          vm.pagination = response.data.pagination
+        })
+      },
+      openModal (isNew, item) {
+        if (isNew) {
+            this.tempProduct = {}
+            this.isNew = true
+        } else {
+            this.tempProduct = Object.assign({}, item)
+            this.isNew = false
+        }
+        $('#productModal').modal('show')
+      },
+      updateProduct () {
+          let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`
+          let httpMethod = 'post'
+          const vm = this
+          if (!vm.isNew) {
+              api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
+              httpMethod = 'put'
+          }
+          this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+              // console.log(response.data)
+              if (response.data.success) {
+                  $('#productModal').modal('hide')
+                  vm.getProducts()
+              } else {
+                  alert('新增失敗')
+              }
+          })
+      },
+      delModal (item) {
+          const vm = this
+          vm.tempProduct = Object.assign({}, item)
+          $('#delProductModal').modal('show')
+      },
+      delProuduct () {
+          const vm = this
+          const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
+          this.$http.delete(api, { data: vm.tempProduct }).then(response => {
+              // console.log(response.data);
+              if (response.data.success) {
+                  $('#delProductModal').modal('hide')
+                  vm.getProducts()
+              } else {
+                  alert('刪除失敗')
+                  $('#delProductModal').modal('hide')
+              }
+          })
+      },
+      uploadFile () {
+        // console.log(this);
+        const uploadedFile = this.$refs.files.files[0]
+        const vm = this
+        const formData = new FormData()
+        formData.append('file-to-upload', uploadedFile)
+        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+        vm.status.fileUploading = true
+        this.$http.post(url, formData, {
+          headers: {
+            'Content-type': 'multipart/form-data'
+          }
+        }).then((response) => {
+          // console.log(response.data);
+          vm.status.fileUploading = false
+          if (response.data.success) {
+            // vm.tempProduct.imageUrl = response.data.imageUrl;
+            // console.log(vm.tempProduct);
+            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
+            this.$bus.$emit('message:push', '圖片上傳成功', 'success')
+          } else {
+            this.$bus.$emit('message:push', response.data.message, 'danger')
+          }
+        })
+      }
+    },
+    created () {this.getProducts()
+    }
+}
 </script>

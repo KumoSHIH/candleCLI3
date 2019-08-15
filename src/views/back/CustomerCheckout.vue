@@ -60,39 +60,39 @@
 
 <script>
 export default {
-    data() {
-        return{
+    data () {
+        return {
             order: {
-                user:{}, 
+                user: {}
             },
-            orderID: '',
-        };
+            orderID: ''
+        }
     },
     methods: {
-        getOrder() {
-            const vm = this; 
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`;
+        getOrder () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`
             this.$http.get(api).then((response) => {
-                console.log(response);
-                vm.order = response.data.order;  
-            });
+                console.log(response)
+                vm.order = response.data.order
+            })
         },
-        payOrder() {
-            const vm = this;     
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`;
+        payOrder () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`
             this.$http.post(api).then((response) => {
-                if(response.data.success){
-                    vm.getOrder();
-                    vm.$bus.$emit('message:push', response.data.message,'warning');
+                if (response.data.success) {
+                    vm.getOrder()
+                    vm.$bus.$emit('message:push', response.data.message, 'warning')
                 }
-            });
-        },
+            })
+        }
     },
-    created() {
-        //取得ID
-        this.orderID = this.$route.params.orderID;//orderID>對應路由所自訂義的名稱
-        this.getOrder();
-        //console.log(this.orderID);
+    created () {
+        // 取得ID
+        this.orderID = this.$route.params.orderID // orderID>對應路由所自訂義的名稱
+        this.getOrder()
+        // console.log(this.orderID);
     }
 }
 </script>

@@ -1,8 +1,5 @@
 <template>
     <div>
-        <loading :active.sync="isLoading">
-            <CandleLoading/>
-        </loading>
         <Nav/>
         <div class="bgImg"></div>
         <div class="container">
@@ -20,7 +17,7 @@
                         v-model="user.password">
                     </div>
                     <div class="form-group px-4">
-                        <button class="btn btn-outline-second form-control my-4" 
+                        <button class="btn btn-outline-second form-control my-4"
                         @click.prevent="signIn" @keyup.enter="signIn">登入</button>
                     </div>
                 </div>
@@ -43,38 +40,33 @@
         border-radius: 5px;
         opacity: .9;
     }
-    
 </style>
 
-
 <script>
-import Nav from '../../components/Nav';
+import Nav from '@/components/Nav'
 export default {
-    components:{
-        Nav,
+    components: {
+        Nav
     },
-    data() {
+    data () {
         return {
-            user:{
+            user: {
                 username: '',
-                password: '',
-            },
-            isLoading : false,
-        };
+                password: ''
+            }
+        }
     },
-    methods:{
-        signIn(){
-            const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
-            const vm = this;
-            vm.isLoading = true;
+    methods: {
+        signIn () {
+            const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
+            const vm = this
             this.$http.post(api, vm.user).then((response) => {
-                //console.log(response.data);
-                vm.isLoading = false;
-                if(response.data.success){
-                    vm.$router.push('/admin/products'); 
+                console.log(response.data)
+                if (response.data.success) {
+                    vm.$router.push('/admin/products')
                 }
-            });
-        },
+            })
+        }
     }
 }
 </script>

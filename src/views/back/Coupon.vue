@@ -51,10 +51,7 @@
         </tr>
       </tbody>
     </table>
-
     <Pagination :pageNum="pagination" @getPage="getCoupon" />
-    
-
     <!-- Modal -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
@@ -70,31 +67,26 @@
           <div class="modal-body">
             <div class="row justify-content-center">
               <div class="col-sm-8">
-
                 <div class="form-group">
                   <label for="title">標題</label>
                   <input type="text" class="form-control" id="title" placeholder="請輸入標題"
                   v-model="tempCoupon.title" />
                 </div>
-
                 <div class="form-group">
                   <label for="code">優惠代碼</label>
                   <input type="code" class="form-control" id="code" placeholder="請輸入代碼 : coupon88"
                   v-model="tempCoupon.code"/>
                 </div>
-
                 <div class="form-group">
                   <label for="date">優惠到期日</label>
                   <input type="date" class="form-control" id="date"
                   v-model="tempCoupon.due_date"/>
                 </div>
-
                 <div class="form-group">
                   <label for="percent">優惠折數</label>
                   <input type="text" class="form-control" id="percent" placeholder="請輸入折數  ex : 8折輸入80"
                   v-model="tempCoupon.percent" />
                 </div>
-
                 <div class="form-group">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="is_enabled"
@@ -108,7 +100,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" >取消</button>
-            <button type="button" class="btn btn-primary" 
+            <button type="button" class="btn btn-primary"
             @click="addCoupon">確認</button>
           </div>
         </div>
@@ -141,80 +133,76 @@
     rgb(255, 151, 118)
   );
   background-position: 0 7px;
-  
 }
 </style>
 
 <script>
-import $ from 'jquery';
-import Pagination from "../../components/Pagination";
+import $ from 'jquery'
+import Pagination from '../../components/Pagination'
 export default {
-  components:{
-    Pagination,
+  components: {
+    Pagination
   },
-  data() {
-      return{
-          coupons: [], //for loop
-          tempCoupon: {}, //Modal input
+  data () {
+      return {
+          coupons: [], // for loop
+          tempCoupon: {}, // Modal input
           isNew: false,
-          pagination: {}, 
-      };
+          pagination: {}
+      }
   },
   methods: {
-    getCoupon(page=1){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      const vm = this;
-     
+    getCoupon (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
+      const vm = this
       this.$http.get(api).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         
-        vm.coupons = response.data.coupons;
-        vm.pagination = response.data.pagination;
-        console.log(vm.coupons);
-      });
+        vm.coupons = response.data.coupons
+        vm.pagination = response.data.pagination
+        // console.log(vm.coupons);
+      })
     },
-    openCouponModal(isNew, item){
-      if(isNew){
-        this.tempCoupon = {};
+    openCouponModal (isNew, item) {
+      if (isNew) {
+        this.tempCoupon = {}
         this.isNew = true
-      }else{
-        this.tempCoupon = Object.assign( {},item );
-        this.isNew = false;
+      } else {
+        this.tempCoupon = Object.assign( {},item )
+        this.isNew = false
       }
-      $("#couponModal").modal('show');
+      $("#couponModal").modal('show')
     },
-    addCoupon() {
-      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-      let httpMethod = 'post';
-      const vm = this;
-      
-      if(!vm.isNew){
+    addCoupon () {
+      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
+      let httpMethod = 'post'
+      const vm = this
+      if (!vm.isNew) {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
-        httpMethod = 'put';
+        httpMethod = 'put'
       }
       this.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
-        console.log(response.data);
-        if(response.data.success){
-          $("#couponModal").modal('hide');
-          vm.getCoupon();
-        }else{
-          alert(response.data.message);
+        // console.log(response.data);
+        if (response.data.success){
+          $("#couponModal").modal('hide')
+          vm.getCoupon()
+        } else {
+          alert(response.data.message)
         }  
-      });
+      })
     },
-    delCoupon(id){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${id}`;
-      const vm = this;
+    delCoupon (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${id}`
+      const vm = this
       this.$http.delete(api).then(response => {
-        if(response.data.success){
-          vm.getCoupon();
+        if (response.data.success) {
+          vm.getCoupon()
         }
-      });
-    },
+      })
+    }
   },
-  
-  created(){
-    this.getCoupon();
+  created () {
+    this.getCoupon()
   }
-};
+}
 </script>

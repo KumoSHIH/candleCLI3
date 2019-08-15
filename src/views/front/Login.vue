@@ -9,10 +9,10 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist" >
               <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab"
-                  href="#signIn" role="tab"><i class="fas fa-sign-in-alt mr-1"></i>會員登入</a> 
+                  href="#signIn" role="tab"><i class="fas fa-sign-in-alt mr-1"></i>會員登入</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link "  id="profile-tab" data-toggle="tab" 
+                <a class="nav-link" id="profile-tab" data-toggle="tab"
                   href="#register" role="tab"><i class="fas fa-user-plus mr-1"></i>註冊會員</a>
               </li>
             </ul>
@@ -21,12 +21,10 @@
                 <div class="form-group px-4">
                   <label for="user">帳號</label>
                   <input type="text" class="form-control" id="user" placeholder="abc@email.com">
-                    
                 </div>
                 <div class="form-group px-4">
                   <label for="password">密碼</label>
                   <input type="password" class="form-control" id="password">
-                  
                 </div>
                 <input type="button" class="btn btn-outline-main col-3 ml-4 mb-4" value="登入">
               </div>
@@ -47,24 +45,11 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import Nav from '../../components/Nav';
-export default {
-  
-  components:{
-    Nav,
-  },
-  
-};
-</script>
-
 
 <style lang="scss" scoped>
 
@@ -96,15 +81,13 @@ export default {
         padding-bottom: 12px;
         background-color: #574f7d;
         color: #fff;
-        
         font-size: 16px;
         font-weight: bold;
         letter-spacing: 2px;
         text-align: center;
-        
         transition: .3s;
         &:hover{
-            color: darken(#fdef96,20%);   
+            color: darken(#fdef96,20%);
         }
     }
     .nav-link.active{
@@ -112,7 +95,7 @@ export default {
         background-color: #fff;
         opacity: 1;
         &:hover{
-            color: darken(#574f7d,20%);   
+            color: darken(#574f7d,20%);
         }
     }
     .tab-content{
@@ -127,3 +110,12 @@ export default {
       box-shadow: 4px 5px 5px 4px rgba( 0, 0, 0, .8);
     }
 </style>
+
+<script>
+import Nav from '../../components/Nav'
+export default {
+  components: {
+    Nav
+  }
+}
+</script>

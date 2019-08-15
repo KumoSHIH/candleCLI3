@@ -6,7 +6,6 @@
                     <img src="../assets/images/title02.png" height="30">
                 </router-link>
             </li>
-            
             <div class="col-12 col-md-5 col-lg-4 d-flex justify-content-center align-items-center mt-2 mt-md-0 ">
                 <!-- <li class="nav-item searchWrap">
                     <div class="icon d-none d-md-inline-flex align-items-center">
@@ -38,13 +37,11 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/cart">
                         <i class="fas fa-shopping-cart navIcon"></i>
-                        <span class="badge badge-pill badge-danger" v-if="cart.length">{{ cart.length }}</span>
+                        <span class="badge badge-pill badge-danger">{{ cartLength }}</span>
                     </router-link>
                 </li>
             </div>
         </ul>
-        
-
         <!-- Modal -->
         <div class="modal fade " id="modalQA" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -90,10 +87,8 @@
                                     class="form-control" id="comments" placeholder="歡迎給予我們意見，小幫手將會盡快回覆您！"></textarea>
                                     <span class="text-danger" v-if="errors.has('comments')">請輸入訊息</span>
                                 </div>
-
                             </div>
                         </div>
-                        
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="button" class="btn btn-main btnModal w-100"
@@ -131,7 +126,6 @@
         border-radius: 5px;
         border: 0;
         height: 30px;
-        
         width: 0;
     }
     @keyframes move{
@@ -141,7 +135,7 @@
     .badge{
         position: relative;
         top: -9px;
-        left: -6px;  
+        left: -6px;
     }
 //Modal
     .btnModal{
@@ -159,51 +153,43 @@
 </style>
 
 <script>
-import $ from 'jquery';
+import $ from 'jquery'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-    data(){
-        return{
-            cart: [],
-            message:{},  
-        
+    data () {
+        return {
+            message: {}
         }
     },
-    methods:{
-        getCart(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            vm.$http.get(api).then((response)=>{
-                //console.log(response.data);
-                vm.cart = response.data.data.carts;
-                //console.log(vm.cart);
-            })
+    methods: {
+        ...mapActions('cartModules', ['getCart']),
+        openModal () {
+            $('#modalQA').modal('show')
         },
-        openModal(){
-            $('#modalQA').modal('show');
-        },
-        sendMessage(){
-            const vm = this;
+        sendMessage () {
+            const vm = this
             vm.message = {
                 name: '',
                 email: '',
-                message: '',
-            };
+                message: ''
+            }
             vm.$validator.validate().then(valid => {
                 if (valid) {
-                    $('#modalQA').modal('hide');
-                    vm.message = {};
-                }else{
-                    alert('欄位不完整');
+                    $('#modalQA').modal('hide')
+                    vm.message = {}
+                } else {
+                    alert('欄位不完整')
                 }
-            });
-        },
+            })
+        }
     },
-    created(){
-        const vm = this;
-        vm.getCart();
-        // vm.$bus.$on('updateCart', ()=>{
-        //     vm.getCart();
-        // })
+    computed: {
+        ...mapGetters(['isLoading']),
+        ...mapGetters('cartModules', ['cart', 'cartLength'])
     },
+    created () {
+        this.$store.dispatch('cartModules/getCart')
+    }
 }
 </script>

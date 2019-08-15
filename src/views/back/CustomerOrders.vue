@@ -5,7 +5,7 @@
             <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
                 <div class="card border-0 shadow-sm">
                     <div style="height: 150px; background-size: cover; background-position: center"
-                    :style="{ backgroundImage: `url(${item.imageUrl})` }"></div>  
+                    :style="{ backgroundImage: `url(${item.imageUrl})` }"></div>
                     <div class="card-body">
                     <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
                     <h5 class="card-title">
@@ -72,10 +72,9 @@
                         加到購物車
                         </button>
                     </div>
-                </div>    
+                </div>
             </div>
-        </div>  
-        
+        </div>
         <!-- 購物車明細   -->
         <hr>
         <div class="container m-5">
@@ -112,8 +111,6 @@
                                 <th colspan="3">折扣價</th>
                                 <th ><strong>{{ cartDetail.final_total | currency }}</strong></th>
                             </tr>
-                            
-                            
                         </tbody>
                     </table>
                     <!-- 套用優惠券 -->
@@ -122,23 +119,21 @@
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary"
                             @click="addCouponCode">套用優惠碼</button>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
-
             <!-- 訂單詳細資訊 -->
             <div class="my-5 row justify-content-center">
                 <form class="col-md-6" @submit.prevent="createOrder">
                     <div class="form-group">
                         <label for="useremail">Email</label>
                         <input type="email" class="form-control" name="email" id="useremail" placeholder="請輸入 Email"
-                        v-validate="'required|email'"> 
+                        v-validate="'required|email'">
                         <span class="text-danger" v-if="errors.has('email')">
                             {{ errors.first('email') }}
                         </span>
-                    </div>                            
-
+                    </div>
                     <div class="form-group">
                         <label for="username">收件人姓名</label>
                         <input type="text" class="form-control" name="name" id="username" placeholder="輸入姓名"
@@ -147,7 +142,6 @@
                         v-validate="'required'">
                         <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
                     </div>
-                            
                     <div class="form-group">
                         <label for="usertel">收件人電話</label>
                         <input type="tel" class="form-control" id="usertel" name="tel" placeholder="請輸入電話"
@@ -155,7 +149,6 @@
                         v-validate="'required'">
                         <span class="text-danger" v-if="errors.has('tel')">電話必須輸入</span>
                     </div>
-                            
                     <div class="form-group">
                         <label for="useraddress">收件人地址</label>
                         <input type="text" class="form-control" name="address" id="useraddress" placeholder="請輸入地址"
@@ -163,130 +156,127 @@
                         v-validate="'required'">
                         <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
                     </div>
-                            
                     <div class="form-group">
                         <label for="comment">留言</label>
                         <textarea name="" id="comment" class="form-control" cols="30" rows="10"
                         v-model="form.message"></textarea>
-                    </div> 
-
+                    </div>
                     <div class="text-right">
                         <button class="btn btn-danger" >送出訂單</button>
                     </div>
                 </form>
             </div>
-
-        </div>    
-    </div>    
+        </div>
+    </div>
 </template>
 
 <script>
-import $ from 'jquery';
+import $ from 'jquery'
 export default {
-    data(){
-        return{
+    data () {
+        return {
             products: [],
             isLoading: false,
-            product: {}, //存放單一筆 Modal的資料   
-            status:{  //判斷畫面上是哪一筆資料正在讀取中
-                loadingItem:'',
+            product: {},
+            status: {
+                loadingItem: ''
             },
-            cartDetail: [],  
-            coupon_code: '',  
-            form:{
-                user:{
+            cartDetail: [],
+            coupon_code: '',
+            form: {
+                user: {
                     name: '',
                     email: '',
                     tel: '',
-                    address: '',
+                    address: ''
                 }
-            },
+            }
         }
     },
-    methods:{
-        getOrders() {
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
+    methods: {
+        getOrders () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`
             this.$http.get(api).then(response => {
-                //console.log(response.data);
-                vm.products = response.data.products;
-            });
+                // console.log(response.data);
+                vm.products = response.data.products
+            })
         },
-        getProduct(id){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-            vm.status.loadingItem = id; 
+        getProduct (id) {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+            vm.status.loadingItem = id
             this.$http.get(api).then(response => {
-                vm.product = response.data.product;
-                $('#productModal').modal('show');
-                //console.log(response);
-                vm.status.loadingItem = '';  
-            });
+                vm.product = response.data.product
+                $('#productModal').modal('show')
+                // console.log(response);
+                vm.status.loadingItem = ''
+            })
         },
-        addCart(id, qty = 1){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            vm.status.loadingItem = id; 
+        addCart ( id, qty = 1 ) {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+            vm.status.loadingItem = id
             const cart = {
                 product_id: id,
-                qty,
+                qty
             }
             this.$http.post(api, { data:cart }).then(response => {
                 //console.log(response);
-                vm.status.loadingItem = ''; 
-                vm.getCart(); //重新取得購物車內容 
-                $('#productModal').modal('hide');
-            });
+                vm.status.loadingItem = ''
+                vm.getCart()
+                $('#productModal').modal('hide')
+            })
         },
-        getCart(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`; 
+        getCart () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
             this.$http.get(api).then(response => {
                 //console.log(response.data);
-                vm.cartDetail = response.data.data;
-                console.log(vm.cartDetail);
-            });
+                vm.cartDetail = response.data.data
+                console.log(vm.cartDetail)
+            })
         },
-        delCartItem(id){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+        delCartItem (id) {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
             this.$http.delete(api).then(response => {
-                console.log(response);
-                vm.getCart();
-            });
+                console.log(response)
+                vm.getCart()
+            })
         },
-        addCouponCode(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+        addCouponCode () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
             const coupon = {
                 code: vm.coupon_code
-            };
+            }
             this.$http.post(api,{ data: coupon }).then((response) => {
-                console.log(response);
-                vm.getCart();
-            });
+                console.log(response)
+                vm.getCart()
+            })
         },
-        createOrder(){
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-            const order = vm.form;
+        createOrder () {
+            const vm = this
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+            const order = vm.form
             this.$validator.validate().then((valid) => {
-                if (valid ) { //通過驗證才建立訂單
+                if (valid ) {
                     this.$http.post(api,{ data: order }).then(response => {
-                        if(response.data.success){
-                            console.log('訂單已建立',response);
-                            vm.$router.push(`customer_checkout/${response.data.orderId}`);
-                        };
-                    });
-                }else{
-                    alert('欄位不完整');
+                        if (response.data.success) {
+                            // console.log('訂單已建立',response);
+                            vm.$router.push(`customer_checkout/${response.data.orderId}`)
+                        }
+                    })
+                } else {
+                    alert('欄位不完整')
                 }
-            });
-        },
+            })
+        }
     },
-    created(){
-        this.getOrders();
-        this.getCart();
-    },
+    created () {
+        this.getOrders()
+        this.getCart()
+    }
 }
 </script>

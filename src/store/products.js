@@ -13,7 +13,7 @@ export default ({
             axios.get(api).then((response) => {
                 context.commit('PRODUCTS', response.data.products)
                 context.commit('CATEGORIES', response.data.products)
-                context.commit('LOADING', false, { root: false })
+                context.commit('LOADING', false, { root: true })
             })
         }
     },

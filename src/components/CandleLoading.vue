@@ -27,7 +27,6 @@
 </template>
 
 <style lang="scss" scoped>
-    
     body{
         margin: 0 auto;
     }
@@ -46,29 +45,26 @@
         height: 80px;
         width: 50px;
         position: relative;
-        
         color: #F2C640;
         background-color: #cf455c;
         border-top-right-radius: 7px;
-        border-top-left-radius: 7px; 
-        
+        border-top-left-radius: 7px;
         font-size: 45px;
         text-align: center;
         padding-top: 20px;
         margin-right: 5px;
-        
         animation: jump 2s infinite;
     }
     @keyframes jump{
         0%{
-            transform: translateY(0px);  
+            transform: translateY(0px);
         }
         50%{
-            transform: translateY(40px);  
+            transform: translateY(40px);
             box-shadow:0 15px 0 rgb(242, 198, 64);
         }
         100%{
-            transform: translateY(0px);  
+            transform: translateY(0px);
         }
     }
     .candle span{

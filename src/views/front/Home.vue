@@ -1,8 +1,6 @@
 <template>
     <div>
         <Probar/>
-        <loading :active.sync="isLoading"><CandleLoading/></loading>
-        
         <a href="#" class="scrollTop text-center animatedJS" id="top">
             <i class="fas fa-arrow-up"></i>
         </a>
@@ -118,11 +116,9 @@
                     無論您家中怎樣的裝修風格，canMade 的香薰蠟燭會爲你的家中增添一些溫暖的感覺。
                 </p>
             </div>
-            
             <div class="text-white hero1Icon animatedJS">
-                
                 <i class="fas fa-angle-double-down fa-2x"></i>
-            </div>   
+            </div>
         </div>
         <div class="hero2 row justify-content-center no-gutters">
             <div class="hero2Txt d-flex flex-column justify-content-center align-items-center">
@@ -153,18 +149,26 @@
                     ，小氣泡或細節不平整等為正常狀況，不影響使用和美觀，保證每個產品都擁有
                     100%的效果，非質量問提概不退換。</p>
             </div>
-            
         </section>
-
         <section class="hero3 row justify-content-center align-items-center no-gutters">
             <div class="col-md-6 handMadeWrap d-flex flex-column justify-content-center align-items-center">
-                <router-link class="bntHand" to="/class">
-                    <button class="btn btn-main">了解更多</button>
-                </router-link>
-                <p class="col-10 animatedLeft">帶上你的情人、朋友，一起來做一個屬於自己香味的蠟燭吧！靜靜地感受心靈的沉靜，
-                    感受天然低溫大豆蠟的獨特觸感，彷彿洗去一天的疲憊....香氛蠟燭不僅僅是只有照明、香氛舒壓的功用，
-                    它也是一個家飾、一種生活品味的呈現。等你來一起體驗它的獨特魅力！
-                </p>
+                <div class="col-10 animatedLeft" id="blip2">
+                    <p>帶上你的情人、朋友，一起來做一個屬於自己香味的蠟燭吧！靜靜地感受心靈的沉靜，
+                        感受天然低溫大豆蠟的獨特觸感，彷彿洗去一天的疲憊....香氛蠟燭不僅僅是只有照明、香氛舒壓的功用，
+                        它也是一個家飾、一種生活品味的呈現。等你來一起體驗它的獨特魅力！
+                    </p>
+                    <button class="btn btn-main bntHand" id='click1' @click="btn1">場次報名</button>
+                </div>
+                <div class="col-12 col-lg-10 text-center" id="blip">
+                    <h3 class="text-main my-2"><i class="far fa-lightbulb mr-2"></i>場次報名</h3>
+                        <ul>
+                            <li class="mb-1">2019/08/03 <i class="fas fa-glass-whiskey ml-2 mr-1"></i>經典大豆蠟燭 $1,000</li>
+                            <li class="mb-1">2019/08/04 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
+                            <li class="mb-1">2019/08/10 <i class="fas fa-pepper-hot ml-2 mr-1"></i>水果大豆蠟燭 $1,500</li>
+                            <li >2019/08/11 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
+                        </ul>
+                    <button class="btn btn-main" id='click2' @click="btn2">Go back</button>
+                </div>
             </div>
             <div class="col-md-6 hmTxt d-flex flex-column justify-content-center align-items-center ">
                 <div class="col-10 handMadeTxt mt-5 text-white animatedRight">
@@ -178,7 +182,6 @@
                     <li>請遵守活動場地規則及配合現場講師指示，若有違反因而造成損害，自行負責。</li>
                     <li>活動前 15 分鐘開放入場，為了讓體驗活動順利進行，遲到超過 30 分鐘即無法入場，視同放棄課程，概不退款。</li>
                     <li>活動將依需求進行側拍，如不希望被攝影，可以於活動現場告知工作人員。</li>
-                    
                 </div>
             </div>
         </section>
@@ -189,11 +192,10 @@
                     <div class="sale col-10 col-md-3 col-lg-2  mb-4 mb-md-0 mr-md-2 animatedTop">
                         <router-link to="/list" style="text-decoration:none">
                             <div class="inner">
-                                <a href="#" class="h1 text-center mt-4 text-info text-shadow">夏日慶典</a>
+                                <a href="#" class="h1 text-center mt-4 text-shadow">夏日慶典</a>
                                 <p>炎熱的夏日，來點降價小確幸解解煩悶吧！</p>
                             </div>
                         </router-link>
-                    
                     </div>
                     <div class="new col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
                         <router-link to="/list" style="text-decoration:none">
@@ -217,58 +219,93 @@
     </div>
 </template>
 
-
-
 <script>
-import $ from 'jquery';
-import Probar from '../../components/Probar';
+import $ from 'jquery'
+import anime from 'animejs'
+import Probar from '../../components/Probar'
 export default {
-    components:{   
-        Probar,
+    components: {
+        Probar
     },
-    data(){
-        return{
-            isLoading: false,
+    methods: {
+        btn1 () {
+            anime({
+                targets: '#blip',
+                opacity: 1,
+                duration: 500,
+                translateY: 100
+            })
+            anime({
+                targets: '#click1',
+                opacity: 0,
+                duration: 500,
+                translateY: 100
+            })
+            anime({
+                targets: '#blip2',
+                opacity: 0,
+                duration: 500,
+                translateY: 100
+            })
+        },
+        btn2 () {
+            anime({
+                targets: '#blip',
+                opacity: 0,
+                duration: 500,
+                translateY: -500
+            })
+            anime({
+                targets: '#click1',
+                opacity: 1,
+                duration: 500,
+                translateY: 0
+            })
+            anime({
+                targets: '#blip2',
+                opacity: 1,
+                duration: 500,
+                translateY: 0
+            })
         }
     },
-    created(){
-        $(document).ready(function(){
-            $('#top').click(function(e){
-                e.preventDefault();
-                $('html,body').animate({scrollTop : 0}, 1000);
-            });
-            $(window).scroll(function(){
-                var scrollPos = $(window).scrollTop();
-                var windowHeight = $(window).height();
-                
-                //console.log(scrollPos,windowHeight);
-                $('.animatedJS').each(function(){
-                    var thisPos = $(this).offset().top;
-                    //console.log(thisPos);
-                    if((windowHeight + scrollPos) >= thisPos){
-                        $(this).addClass('fadeIn');
-                    }
-                });
-                $('.animatedTop').each(function(){
-                    var thisPos = $(this).offset().top;
-                    if((windowHeight + scrollPos) >= thisPos){
-                        $(this).addClass('fadeIn');
-                    }
-                });
-                $('.animatedRight').each(function(){
-                    var thisPos = $(this).offset().top;
-                    if((windowHeight + scrollPos) > thisPos){
-                        $(this).addClass('fadeRight');
-                    }
-                });
-                $('.animatedLeft').each(function(){
-                    var thisPos = $(this).offset().top;
-                    if((windowHeight + scrollPos) > thisPos){
-                        $(this).addClass('fadeLeft');
-                    }
-                });
+    created () {
+        $(document).ready(function () {
+            $('#top').click(function (e) {
+                e.preventDefault()
+                $('html,body').animate({scrollTop : 0 }, 1000)
             })
-        });
+            $(window).scroll(function () {
+                var scrollPos = $(window).scrollTop()
+                var windowHeight = $(window).height()
+                // console.log(scrollPos,windowHeight);
+                $('.animatedJS').each(function () {
+                    var thisPos = $(this).offset().top
+                    // console.log(thisPos);
+                    if ((windowHeight + scrollPos) >= thisPos) {
+                        $(this).addClass('fadeIn')
+                    }
+                })
+                $('.animatedTop').each(function () {
+                    var thisPos = $(this).offset().top
+                    if ((windowHeight + scrollPos) >= thisPos) {
+                        $(this).addClass('fadeIn')
+                    }
+                })
+                $('.animatedRight').each(function () {
+                    var thisPos = $(this).offset().top
+                    if ((windowHeight + scrollPos) > thisPos) {
+                        $(this).addClass('fadeRight')
+                    }
+                })
+                $('.animatedLeft').each(function () {
+                    var thisPos = $(this).offset().top
+                    if ((windowHeight + scrollPos) > thisPos) {
+                        $(this).addClass('fadeLeft')
+                    }
+                })
+            })
+        })
     }
 }
 </script>
