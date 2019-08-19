@@ -130,7 +130,7 @@ export default {
     })
   },
   destroyed() { // 離開頁面id銷毀 避免其他入口進來有錨點問題
-    localStorage.setItem('told','')
+    localStorage.setItem('toId','')
   }
 }
 </script>
