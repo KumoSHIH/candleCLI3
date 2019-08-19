@@ -51,10 +51,10 @@
 <script>
 export default ({
   methods: {
-    goto(Id) {
-        let selectId = Id
-        localStorage.setItem('toId',selectId)
-        this.$router.push({ path: '/bulletin' })
+    goto (Id) {
+      let selectId = Id
+      localStorage.setItem('toId', selectId)
+      this.$router.push({ path: '/bulletin' })
     }
   }
 })

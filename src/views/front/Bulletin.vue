@@ -108,29 +108,29 @@ export default {
   methods: {
     // 從本地找到儲存的id錨點
     // 設置方法跳轉至id錨點
-    getlocal() {
+    getlocal () {
       let selectId = localStorage.getItem('toId')
       let toElement = document.getElementById(selectId)
-      if(selectId) { // 如果對應Id在 就跳轉
+      if (selectId) { // 如果對應Id在 就跳轉
         toElement.scrollIntoView()
       }
     }
   },
-  created() { // 已取得data 屬性 方法 事件 僅有el目前不可見
-  // $nextTick: 是在下次DOM更新循環結束後執行延遲回調 
+  created () { // 已取得data 屬性 方法 事件 僅有el目前不可見
+  // $nextTick: 是在下次DOM更新循環結束後執行延遲回調
   // 在修改數據之後使用 則可以在回調中獲取更新後的DOM
     this.$nextTick(() => {
-        this.getlocal()
+      this.getlocal()
     })
   },
-  mounted() { // el被創建階段
-    let vm = this
-    vm.$nextTick(function() {
-      window.addEventListener('scroll',vm.handleScroll)  
-    })
-  },
-  destroyed() { // 離開頁面id銷毀 避免其他入口進來有錨點問題
-    localStorage.setItem('toId','')
+//   mounted () { // el被創建階段
+//     let vm = this
+//     vm.$nextTick(function () {
+//       window.addEventListener('scroll', vm.handleScroll)
+//     })
+//   },
+  destroyed () { // 離開頁面id銷毀 避免其他入口進來有錨點問題
+    localStorage.setItem('toId', '')
   }
 }
 </script>
