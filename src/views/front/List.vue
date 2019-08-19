@@ -147,40 +147,40 @@ import Card from '../../components/Card'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    components: {
-        Card
-    },
-    data () {
-        return {
-            listItem: '',
-            currentPage: 0,
-            pages: 0
-        }
-    },
-    methods: {
-        getParams () {
-            if (this.$route.query.category) {
-                this.listItem = this.$route.query.category
-            }
-        },
-        ...mapActions('productsModules', ['getProduct'])
-    },
-    computed: {
-        filterData () {
-            const vm = this
-            if (vm.listItem) {
-                return vm.products.filter((item) => {
-                    const data = item.category.toLowerCase().includes(vm.listItem.toLowerCase())
-                    return data
-                })
-            }
-            return vm.products
-        },
-        ...mapGetters('productsModules', ['categories', 'products'])
-    },
-    created () {
-        this.getParams()
-        this.getProduct()
+  components: {
+    Card
+  },
+  data () {
+    return {
+      listItem: '',
+      currentPage: 0,
+      pages: 0
     }
+  },
+  methods: {
+    getParams () {
+      if (this.$route.query.category) {
+        this.listItem = this.$route.query.category
+      }
+    },
+    ...mapActions('productsModules', ['getProduct'])
+  },
+  computed: {
+    filterData () {
+      const vm = this
+      if (vm.listItem) {
+        return vm.products.filter((item) => {
+          const data = item.category.toLowerCase().includes(vm.listItem.toLowerCase())
+          return data
+        })
+      }
+      return vm.products
+    },
+    ...mapGetters('productsModules', ['categories', 'products'])
+  },
+  created () {
+    this.getParams()
+    this.getProduct()
+  }
 }
 </script>

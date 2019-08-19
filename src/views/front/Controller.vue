@@ -45,28 +45,28 @@
 <script>
 import Nav from '@/components/Nav'
 export default {
-    components: {
-        Nav
-    },
-    data () {
-        return {
-            user: {
-                username: '',
-                password: ''
-            }
-        }
-    },
-    methods: {
-        signIn () {
-            const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
-            const vm = this
-            this.$http.post(api, vm.user).then((response) => {
-                console.log(response.data)
-                if (response.data.success) {
-                    vm.$router.push('/admin/products')
-                }
-            })
-        }
+  components: {
+    Nav
+  },
+  data () {
+    return {
+      user: {
+        username: '',
+        password: ''
+      }
     }
+  },
+  methods: {
+    signIn () {
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
+      const vm = this
+      this.$http.post(api, vm.user).then((response) => {
+        console.log(response.data)
+        if (response.data.success) {
+          vm.$router.push('/admin/products')
+        }
+      })
+    }
+  }
 }
 </script>

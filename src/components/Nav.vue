@@ -157,39 +157,39 @@ import $ from 'jquery'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-    data () {
-        return {
-            message: {}
-        }
-    },
-    methods: {
-        ...mapActions('cartModules', ['getCart']),
-        openModal () {
-            $('#modalQA').modal('show')
-        },
-        sendMessage () {
-            const vm = this
-            vm.message = {
-                name: '',
-                email: '',
-                message: ''
-            }
-            vm.$validator.validate().then(valid => {
-                if (valid) {
-                    $('#modalQA').modal('hide')
-                    vm.message = {}
-                } else {
-                    alert('欄位不完整')
-                }
-            })
-        }
-    },
-    computed: {
-        ...mapGetters(['isLoading']),
-        ...mapGetters('cartModules', ['cart', 'cartLength'])
-    },
-    created () {
-        this.$store.dispatch('cartModules/getCart')
+  data () {
+    return {
+      message: {}
     }
+  },
+  methods: {
+    ...mapActions('cartModules', ['getCart']),
+    openModal () {
+      $('#modalQA').modal('show')
+    },
+    sendMessage () {
+      const vm = this
+      vm.message = {
+        name: '',
+        email: '',
+        message: ''
+      }
+      vm.$validator.validate().then(valid => {
+        if (valid) {
+          $('#modalQA').modal('hide')
+          vm.message = {}
+        } else {
+          alert('欄位不完整')
+        }
+      })
+    }
+  },
+  computed: {
+    ...mapGetters(['isLoading']),
+    ...mapGetters('cartModules', ['cart', 'cartLength'])
+  },
+  created () {
+    this.$store.dispatch('cartModules/getCart')
+  }
 }
 </script>

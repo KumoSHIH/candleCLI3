@@ -4,15 +4,15 @@
             <div class="row justify-content-center text-light">
                 <div class="col-md-4 d-flex flex-column text-center mt-5">
                     <h6>關於我們</h6>
-                    <a href="#" @click.prevent="serviceBtn">實體店面</a>
-                    <a href="#" @click.prevent="serviceBtn">一般問題</a>
-                    <a href="#" @click.prevent="serviceBtn">人才招募</a>
+                    <a href="#" @click.prevent="goto('about')">實體店面</a>
+                    <a href="#" @click.prevent="goto('about')">一般問題</a>
+                    <a href="#" @click.prevent="goto('about')">人才招募</a>
                 </div>
                 <div class="col-md-4 d-flex flex-column text-center mt-5">
                     <h6>顧客服務</h6>
-                    <a href="#" @click.prevent="serviceBtn">運送方式</a>
-                    <a href="#" @click.prevent="serviceBtn">付款方式</a>
-                    <a href="#" @click.prevent="serviceBtn">會員優惠</a>
+                    <a href="#" @click.prevent="goto('service')">運送方式</a>
+                    <a href="#" @click.prevent="goto('service')">付款方式</a>
+                    <a href="#" @click.prevent="goto('service')">會員優惠</a>
                 </div>
                 <div class="col-md-4 text-center mt-5">
                     <h6>聯絡我們</h6>
@@ -50,11 +50,12 @@
 
 <script>
 export default ({
-    methods: {
-        serviceBtn () {
-            const vm = this
-            vm.$router.push({ path: '/bulletin' })
-        }
+  methods: {
+    goto(Id) {
+        let selectId = Id
+        localStorage.setItem('toId',selectId)
+        this.$router.push({ path: '/bulletin' })
     }
+  }
 })
 </script>

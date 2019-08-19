@@ -107,29 +107,32 @@
 
 <script>
 export default {
-    data () {
-        return {
-            product: {},
-            itemID: ''
-        }
-    },
-    methods: {
-        getItemInfo (id) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
-            vm.$http.get(api).then((response) => {
-                vm.product = response.data.product
-                vm.$set(vm.product, 'buyNum', 1)
-            })
-        },
-        addCart (id, qty = 1) {
-            this.$store.dispatch('cartModules/addCart', { id, qty })
-        }
-    },
-    created () {
-        const vm = this
-        vm.itemID = vm.$route.params.itemID // 須和路由設置一樣id名稱
-        vm.getItemInfo(vm.itemID)
+  data () {
+    return {
+      product: {},
+      itemID: '',
+      status: { // 判斷畫面上是哪一筆資料正在讀取中
+        loadingItem: ''
+      }
     }
+  },
+  methods: {
+    getItemInfo (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.$http.get(api).then((response) => {
+        vm.product = response.data.product
+        vm.$set(vm.product, 'buyNum', 1)
+      })
+    },
+    addCart (id, qty = 1) {
+      this.$store.dispatch('cartModules/addCart', { id, qty })
+    }
+  },
+  created () {
+    const vm = this
+    vm.itemID = vm.$route.params.itemID // 須和路由設置一樣id名稱
+    vm.getItemInfo(vm.itemID)
+  }
 }
 </script>

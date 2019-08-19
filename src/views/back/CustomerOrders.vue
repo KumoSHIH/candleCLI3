@@ -173,110 +173,110 @@
 <script>
 import $ from 'jquery'
 export default {
-    data () {
-        return {
-            products: [],
-            isLoading: false,
-            product: {},
-            status: {
-                loadingItem: ''
-            },
-            cartDetail: [],
-            coupon_code: '',
-            form: {
-                user: {
-                    name: '',
-                    email: '',
-                    tel: '',
-                    address: ''
-                }
-            }
+  data () {
+    return {
+      products: [],
+      isLoading: false,
+      product: {},
+      status: {
+        loadingItem: ''
+      },
+      cartDetail: [],
+      coupon_code: '',
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
         }
-    },
-    methods: {
-        getOrders () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`
-            this.$http.get(api).then(response => {
-                // console.log(response.data);
-                vm.products = response.data.products
-            })
-        },
-        getProduct (id) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
-            vm.status.loadingItem = id
-            this.$http.get(api).then(response => {
-                vm.product = response.data.product
-                $('#productModal').modal('show')
-                // console.log(response);
-                vm.status.loadingItem = ''
-            })
-        },
-        addCart ( id, qty = 1 ) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-            vm.status.loadingItem = id
-            const cart = {
-                product_id: id,
-                qty
-            }
-            this.$http.post(api, { data:cart }).then(response => {
-                //console.log(response);
-                vm.status.loadingItem = ''
-                vm.getCart()
-                $('#productModal').modal('hide')
-            })
-        },
-        getCart () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-            this.$http.get(api).then(response => {
-                //console.log(response.data);
-                vm.cartDetail = response.data.data
-                console.log(vm.cartDetail)
-            })
-        },
-        delCartItem (id) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-            this.$http.delete(api).then(response => {
-                console.log(response)
-                vm.getCart()
-            })
-        },
-        addCouponCode () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
-            const coupon = {
-                code: vm.coupon_code
-            }
-            this.$http.post(api,{ data: coupon }).then((response) => {
-                console.log(response)
-                vm.getCart()
-            })
-        },
-        createOrder () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
-            const order = vm.form
-            this.$validator.validate().then((valid) => {
-                if (valid ) {
-                    this.$http.post(api,{ data: order }).then(response => {
-                        if (response.data.success) {
-                            // console.log('訂單已建立',response);
-                            vm.$router.push(`customer_checkout/${response.data.orderId}`)
-                        }
-                    })
-                } else {
-                    alert('欄位不完整')
-                }
-            })
-        }
-    },
-    created () {
-        this.getOrders()
-        this.getCart()
+      }
     }
+  },
+  methods: {
+    getOrders () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`
+      this.$http.get(api).then(response => {
+        // console.log(response.data);
+        vm.products = response.data.products
+      })
+    },
+    getProduct (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.status.loadingItem = id
+      this.$http.get(api).then(response => {
+        vm.product = response.data.product
+        $('#productModal').modal('show')
+        // console.log(response);
+        vm.status.loadingItem = ''
+      })
+    },
+    addCart (id, qty = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty
+      }
+      this.$http.post(api, { data: cart }).then(response => {
+        // console.log(response);
+        vm.status.loadingItem = ''
+        vm.getCart()
+        $('#productModal').modal('hide')
+      })
+    },
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      this.$http.get(api).then(response => {
+        // console.log(response.data);
+        vm.cartDetail = response.data.data
+        console.log(vm.cartDetail)
+      })
+    },
+    delCartItem (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      this.$http.delete(api).then(response => {
+        console.log(response)
+        vm.getCart()
+      })
+    },
+    addCouponCode () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const coupon = {
+        code: vm.coupon_code
+      }
+      this.$http.post(api, { data: coupon }).then((response) => {
+        console.log(response)
+        vm.getCart()
+      })
+    },
+    createOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const order = vm.form
+      this.$validator.validate().then((valid) => {
+        if (valid) {
+          this.$http.post(api, { data: order }).then(response => {
+            if (response.data.success) {
+              // console.log('訂單已建立',response);
+              vm.$router.push(`customer_checkout/${response.data.orderId}`)
+            }
+          })
+        } else {
+          alert('欄位不完整')
+        }
+      })
+    }
+  },
+  created () {
+    this.getOrders()
+    this.getCart()
+  }
 }
 </script>

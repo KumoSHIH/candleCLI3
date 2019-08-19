@@ -114,15 +114,14 @@
 </style>
 <script>
 export default {
-    data () {
-        return {
-        }
-    },
-    methods: {
-        goItem (title) {
-            const vm = this
-            vm.$router.push({ path: '/list', query: { category: title } })
-        }
+  data () {
+    return {}
+  },
+  methods: {
+    goItem (title) {
+      const vm = this
+      vm.$router.push({ path: '/list', query: { category: title } })
     }
+  }
 }
 </script>

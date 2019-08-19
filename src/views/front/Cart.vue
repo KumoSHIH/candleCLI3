@@ -77,34 +77,34 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-    data () {
-        return {
-            coupon_code: ''
-        }
-    },
-    methods: {
-        ...mapActions('cartModules', ['getCart', 'delCart']),
-        delCart (id) {
-            this.$store.dispatch('cartModules/delCart', id)
-        },
-        addCoupon () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
-            const coupon = {
-                code: vm.coupon_code
-            }
-            vm.$http.post(api, { data: coupon }).then((response) => {
-                // console.log(response);
-                vm.getCart()
-            })
-        }
-    },
-    computed: {
-        ...mapGetters('cartModules', ['cart']),
-        ...mapGetters(['isLoading'])
-    },
-    created () {
-        this.$store.dispatch('cartModules/getCart')
+  data () {
+    return {
+      coupon_code: ''
     }
+  },
+  methods: {
+    ...mapActions('cartModules', ['getCart', 'delCart']),
+    delCart (id) {
+      this.$store.dispatch('cartModules/delCart', id)
+    },
+    addCoupon () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const coupon = {
+        code: vm.coupon_code
+      }
+      vm.$http.post(api, { data: coupon }).then((response) => {
+        // console.log(response);
+        vm.getCart()
+      })
+    }
+  },
+  computed: {
+    ...mapGetters('cartModules', ['cart']),
+    ...mapGetters(['isLoading'])
+  },
+  created () {
+    this.$store.dispatch('cartModules/getCart')
+  }
 }
 </script>

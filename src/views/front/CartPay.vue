@@ -118,51 +118,50 @@
 
 <script>
 export default {
-    data () {
-        return {
-            order: {
-                user: {}
-            },
-            orderID: ''
-        }
-    },
-    methods: {
-        getOrders (id) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`
-            vm.$store.dispatch('updateLoading', true, { root: true })
-            vm.$http.get(api).then((response) => {
-                // console.log(response.data);
-                vm.order = response.data.order
-                // console.log(vm.order);
-                vm.$store.dispatch('updateLoading', false, { root: true })
-            })
-        },
-        payOrder () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`
-            vm.$store.dispatch('updateLoading', true, { root: true })
-            vm.$validator.validate().then(valid => {
-                if (valid) {
-                    vm.$http.post(api).then((response) => {
-                        if (response.data.success) {
-                            vm.getOrders()
-                            vm.$bus.$emit('updateCart')
-                            vm.$router.push('/cart_fin')
-                            vm.$store.dispatch('updateLoading', false, { root: true })
-                        }
-                    })
-                } else {
-                    vm.$store.dispatch('updateLoading', false, { root: true })
-                    alert('欄位不完整')
-                }
-            })
-        }
-    },
-    created () {
-        // 取得ID
-        this.orderID = this.$route.params.orderID // orderID>對應路由所自訂義的名稱
-        this.getOrders()
+  data () {
+    return {
+      order: {
+        user: {}
+      },
+      orderID: ''
     }
+  },
+  methods: {
+    getOrders (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderID}`
+      vm.$store.dispatch('updateLoading', true, { root: true })
+      vm.$http.get(api).then((response) => {
+        // console.log(response.data);
+        vm.order = response.data.order
+        // console.log(vm.order);
+        vm.$store.dispatch('updateLoading', false, { root: true })
+      })
+    },
+    payOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderID}`
+      vm.$store.dispatch('updateLoading', true, { root: true })
+      vm.$validator.validate().then(valid => {
+        if (valid) {
+          vm.$http.post(api).then((response) => {
+            if (response.data.success) {
+              vm.getOrders()
+              vm.$router.push('/cart_fin')
+              vm.$store.dispatch('updateLoading', false, { root: true })
+            }
+          })
+        } else {
+          vm.$store.dispatch('updateLoading', false, { root: true })
+          alert('欄位不完整')
+        }
+      })
+    }
+  },
+  created () {
+    // 取得ID
+    this.orderID = this.$route.params.orderID // orderID>對應路由所自訂義的名稱
+    this.getOrders()
+  }
 }
 </script>

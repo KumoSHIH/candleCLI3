@@ -20,7 +20,6 @@ import CandleLoading from './components/CandleLoading'
 import Alert from './components/AlertMessage'
 
 import store from './store'
-import './bus'
 
 Vue.config.productionTip = false
 
@@ -37,36 +36,36 @@ Vue.filter('date', dateFilter)
 Vue.use(Vuex)
 Vue.use(anime)
 const i18n = new VueI18n({
-    locale: 'zhTW'
+  locale: 'zhTW'
 })
 Vue.use(VeeValidate, {
-    i18n,
-    events: 'input|blur',
-    dictionary: {
-        zhTW
-    }
+  i18n,
+  events: 'input|blur',
+  dictionary: {
+    zhTW
+  }
 })
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount('#app')
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth) {
-        const api = `${process.env.APIPATH}/api/user/check`
-        axios.post(api).then((response) => {
-        // this 在元件下才可以使用(目前在router下) 所以要改用axios
-            console.log(response.data)
-            if (response.data.success) {
-                next()
-            } else {
-                next({
-                    path: '/login'
-                })
-            }
-        })
-    } else { // 不須驗證or已驗證就直接放行
+  if (to.meta.requiresAuth) {
+    const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
+    axios.post(api).then((response) => {
+    // this 在元件下才可以使用(目前在router下) 所以要改用axios
+      console.log(response.data)
+      if (response.data.success) {
         next()
-    }
+      } else {
+        next({
+          path: '/login'
+        })
+      }
+    })
+  } else { // 不須驗證or已驗證就直接放行
+    next()
+  }
 })

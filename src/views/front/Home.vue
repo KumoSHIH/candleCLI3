@@ -224,88 +224,88 @@ import $ from 'jquery'
 import anime from 'animejs'
 import Probar from '../../components/Probar'
 export default {
-    components: {
-        Probar
+  components: {
+    Probar
+  },
+  methods: {
+    btn1 () {
+      anime({
+        targets: '#blip',
+        opacity: 1,
+        duration: 500,
+        translateY: 100
+      })
+      anime({
+        targets: '#click1',
+        opacity: 0,
+        duration: 500,
+        translateY: 100
+      })
+      anime({
+        targets: '#blip2',
+        opacity: 0,
+        duration: 500,
+        translateY: 100
+      })
     },
-    methods: {
-        btn1 () {
-            anime({
-                targets: '#blip',
-                opacity: 1,
-                duration: 500,
-                translateY: 100
-            })
-            anime({
-                targets: '#click1',
-                opacity: 0,
-                duration: 500,
-                translateY: 100
-            })
-            anime({
-                targets: '#blip2',
-                opacity: 0,
-                duration: 500,
-                translateY: 100
-            })
-        },
-        btn2 () {
-            anime({
-                targets: '#blip',
-                opacity: 0,
-                duration: 500,
-                translateY: -500
-            })
-            anime({
-                targets: '#click1',
-                opacity: 1,
-                duration: 500,
-                translateY: 0
-            })
-            anime({
-                targets: '#blip2',
-                opacity: 1,
-                duration: 500,
-                translateY: 0
-            })
-        }
-    },
-    created () {
-        $(document).ready(function () {
-            $('#top').click(function (e) {
-                e.preventDefault()
-                $('html,body').animate({scrollTop : 0 }, 1000)
-            })
-            $(window).scroll(function () {
-                var scrollPos = $(window).scrollTop()
-                var windowHeight = $(window).height()
-                // console.log(scrollPos,windowHeight);
-                $('.animatedJS').each(function () {
-                    var thisPos = $(this).offset().top
-                    // console.log(thisPos);
-                    if ((windowHeight + scrollPos) >= thisPos) {
-                        $(this).addClass('fadeIn')
-                    }
-                })
-                $('.animatedTop').each(function () {
-                    var thisPos = $(this).offset().top
-                    if ((windowHeight + scrollPos) >= thisPos) {
-                        $(this).addClass('fadeIn')
-                    }
-                })
-                $('.animatedRight').each(function () {
-                    var thisPos = $(this).offset().top
-                    if ((windowHeight + scrollPos) > thisPos) {
-                        $(this).addClass('fadeRight')
-                    }
-                })
-                $('.animatedLeft').each(function () {
-                    var thisPos = $(this).offset().top
-                    if ((windowHeight + scrollPos) > thisPos) {
-                        $(this).addClass('fadeLeft')
-                    }
-                })
-            })
-        })
+    btn2 () {
+      anime({
+        targets: '#blip',
+        opacity: 0,
+        duration: 500,
+        translateY: -500
+      })
+      anime({
+        targets: '#click1',
+        opacity: 1,
+        duration: 500,
+        translateY: 0
+      })
+      anime({
+        targets: '#blip2',
+        opacity: 1,
+        duration: 500,
+        translateY: 0
+      })
     }
+  },
+  created () {
+    $(document).ready(function () {
+      $('#top').click(function (e) {
+        e.preventDefault()
+        $('html,body').animate({ scrollTop: 0 }, 1000)
+      })
+      $(window).scroll(function () {
+        var scrollPos = $(window).scrollTop()
+        var windowHeight = $(window).height()
+        // console.log(scrollPos,windowHeight);
+        $('.animatedJS').each(function () {
+          var thisPos = $(this).offset().top
+          // console.log(thisPos);
+          if ((windowHeight + scrollPos) >= thisPos) {
+            $(this).addClass('fadeIn')
+          }
+        })
+        $('.animatedTop').each(function () {
+          var thisPos = $(this).offset().top
+          if ((windowHeight + scrollPos) >= thisPos) {
+            $(this).addClass('fadeIn')
+          }
+        })
+        $('.animatedRight').each(function () {
+          var thisPos = $(this).offset().top
+          if ((windowHeight + scrollPos) > thisPos) {
+            $(this).addClass('fadeRight')
+          }
+        })
+        $('.animatedLeft').each(function () {
+          var thisPos = $(this).offset().top
+          if ((windowHeight + scrollPos) > thisPos) {
+            $(this).addClass('fadeLeft')
+          }
+        })
+      })
+    })
+  }
 }
 </script>

@@ -144,12 +144,12 @@ export default {
     Pagination
   },
   data () {
-      return {
-          coupons: [], // for loop
-          tempCoupon: {}, // Modal input
-          isNew: false,
-          pagination: {}
-      }
+    return {
+      coupons: [], // for loop
+      tempCoupon: {}, // Modal input
+      isNew: false,
+      pagination: {}
+    }
   },
   methods: {
     getCoupon (page = 1) {
@@ -157,7 +157,6 @@ export default {
       const vm = this
       this.$http.get(api).then(response => {
         // console.log(response.data);
-        
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
         // console.log(vm.coupons);
@@ -168,10 +167,10 @@ export default {
         this.tempCoupon = {}
         this.isNew = true
       } else {
-        this.tempCoupon = Object.assign( {},item )
+        this.tempCoupon = Object.assign({}, item)
         this.isNew = false
       }
-      $("#couponModal").modal('show')
+      $('#couponModal').modal('show')
     },
     addCoupon () {
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
@@ -183,12 +182,12 @@ export default {
       }
       this.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
         // console.log(response.data);
-        if (response.data.success){
-          $("#couponModal").modal('hide')
+        if (response.data.success) {
+          $('#couponModal').modal('hide')
           vm.getCoupon()
         } else {
           alert(response.data.message)
-        }  
+        }
       })
     },
     delCoupon (id) {

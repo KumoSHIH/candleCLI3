@@ -75,39 +75,39 @@
 
 <script>
 export default {
-    data () {
-        return {
-            form: {
-                user: {
-                    name: '',
-                    email: '',
-                    tel: '',
-                    address: ''
-                },
-                message: ''
-            }
-        }
-    },
-    methods: {
-        createOrder () {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
-            const order = vm.form
-            vm.$store.dispatch('updateLoading', true, { root: true })
-            vm.$validator.validate().then((valid) => {
-                if (valid) {
-                    vm.$http.post(api, { data: order }).then((response) => {
-                        if (response.data.success) {
-                            vm.$router.push(`/cart_pay/${response.data.orderId}`)
-                            vm.$store.dispatch('updateLoading', false, { root: true })
-                        }
-                    })
-                } else {
-                    vm.$store.dispatch('updateLoading', false, { root: true })
-                    alert('欄位不完整')
-                }
-            })
-        }
+  data () {
+    return {
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
+        },
+        message: ''
+      }
     }
+  },
+  methods: {
+    createOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const order = vm.form
+      vm.$store.dispatch('updateLoading', true, { root: true })
+      vm.$validator.validate().then((valid) => {
+        if (valid) {
+          vm.$http.post(api, { data: order }).then((response) => {
+            if (response.data.success) {
+              vm.$router.push(`/cart_pay/${response.data.orderId}`)
+              vm.$store.dispatch('updateLoading', false, { root: true })
+            }
+          })
+        } else {
+          vm.$store.dispatch('updateLoading', false, { root: true })
+          alert('欄位不完整')
+        }
+      })
+    }
+  }
 }
 </script>

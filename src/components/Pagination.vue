@@ -25,16 +25,16 @@
 // Vue的資料和 元件的資料是分開的
 // 需要使用 props 來傳入資料
 export default {
-    // 先在元件內設定型別
-    props: {
-        pageNum: {
-            type: Object
-        }
-    },
-    methods: {
-        getPage (page) {
-            this.$emit('getPage', page) // 向外層傳遞
-        }
+  // 先在元件內設定型別
+  props: {
+    pageNum: {
+      type: Object
     }
+  },
+  methods: {
+    getPage (page) {
+      this.$emit('getPage', page) // 向外層傳遞
+    }
+  }
 }
 </script>

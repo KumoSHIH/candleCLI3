@@ -78,15 +78,15 @@
 
 <script>
 export default {
-    props: ['cardItem'],
-    methods: {
-        addCart (id, qty = 1) {
-            this.$store.dispatch('cartModules/addCart', { id, qty })
-        },
-        itemPage (id) {
-            const vm = this
-            vm.$router.push(`item_page/${id}`)
-        }
+  props: ['cardItem'],
+  methods: {
+    addCart (id, qty = 1) {
+      this.$store.dispatch('cartModules/addCart', { id, qty })
+    },
+    itemPage (id) {
+      const vm = this
+      vm.$router.push(`item_page/${id}`)
     }
+  }
 }
 </script>

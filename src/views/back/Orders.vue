@@ -138,72 +138,72 @@
 import $ from 'jquery'
 import Pagination from '../../components/Pagination'
 export default {
-    components: {
-        Pagination   
-    },
-    data () {
-        return {
-            isLoading: false,
-            pagination: {},
-            orders: [],
-            tempOrder: {},
-            tempProduct: {
-                product: {}
-            },
-            value: '',
-            isReverse: false
-        }
-    },
-    methods: {
-        getOrders (page = 1) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
-            const vm = this
-            vm.isLoading = true
-            this.$http.get(api).then((response) => {
-                // console.log(response.data);
-                vm.isLoading = false
-                vm.orders = response.data.orders
-                vm.pagination = response.data.pagination
-                console.log(vm.orders)
-            })
-        },
-        editOrder (item) {
-            const vm = this
-            $('#editOrderModal').modal('show')
-            vm.tempOrder = Object.assign({}, item)
-            vm.tempProduct = Object.assign({}, item.products)
-            console.log(vm.tempOrder)
-            console.log(vm.tempProduct)
-        },
-        updateOrder (id) {
-            const vm = this
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/order/${id}`
-            this.$http.put(api, { data: vm.tempOrder }).then(response => {
-                // console.log(response.data);
-                vm.isLoading = false
-                if (response.data.success) {
-                    $('#editOrderModal').modal('hide')
-                }
-            })
-        }
-    },
-    computed: {
-        filterArray () {
-            const vm = this
-            let newArray = vm.orders.sort((a, b) => {
-                a = a[vm.value]
-                b = b[vm.value]
-                if (vm.isReverse === true) {
-                    return a - b
-                } else {
-                    return b - a
-                }
-            })
-            return newArray
-        }
-    },
-    created () {
-        this.getOrders()
+  components: {
+    Pagination
+  },
+  data () {
+    return {
+      isLoading: false,
+      pagination: {},
+      orders: [],
+      tempOrder: {},
+      tempProduct: {
+        product: {}
+      },
+      value: '',
+      isReverse: false
     }
+  },
+  methods: {
+    getOrders (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
+      const vm = this
+      vm.isLoading = true
+      this.$http.get(api).then((response) => {
+        // console.log(response.data);
+        vm.isLoading = false
+        vm.orders = response.data.orders
+        vm.pagination = response.data.pagination
+        console.log(vm.orders)
+      })
+    },
+    editOrder (item) {
+      const vm = this
+      $('#editOrderModal').modal('show')
+      vm.tempOrder = Object.assign({}, item)
+      vm.tempProduct = Object.assign({}, item.products)
+      console.log(vm.tempOrder)
+      console.log(vm.tempProduct)
+    },
+    updateOrder (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/order/${id}`
+      this.$http.put(api, { data: vm.tempOrder }).then(response => {
+        // console.log(response.data);
+        vm.isLoading = false
+        if (response.data.success) {
+          $('#editOrderModal').modal('hide')
+        }
+      })
+    }
+  },
+  computed: {
+    filterArray () {
+      const vm = this
+      let newArray = vm.orders.sort((a, b) => {
+        a = a[vm.value]
+        b = b[vm.value]
+        if (vm.isReverse === true) {
+          return a - b
+        } else {
+          return b - a
+        }
+      })
+      return newArray
+    }
+  },
+  created () {
+    this.getOrders()
+  }
 }
 </script>
