@@ -1,12 +1,14 @@
-$main: #574f7d; //主色
-$second: #95adbe; //副色
-$text-main: #fdef96; //文字主色
+$main: #574f7d;
+$second: #95adbe;
+$text-main: #fdef96;
 $text-light : #f76262;
-$text-dark: #574f7d; // 文字深色
 
 $font-s: 16px;
 $font-m: 18px;
 
 *{
-    font-family: 'Microsoft JhengHei','Roboto','San Francisco','Heiti FC','sans-serif';
+  font-family: 'Microsoft JhengHei','Roboto','San Francisco','Heiti FC','sans-serif';
+}
+.text-main{
+  color: $text-main;
 }

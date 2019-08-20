@@ -7,6 +7,10 @@ export default new Router({
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
+    } else if (to.path === '/bulletin' && to.hash) {
+      return {
+        selector: to.hash
+      }
     } else {
       return { x: 0, y: 0 }
     }

@@ -42,7 +42,6 @@
             </router-link>
           </li>
         </ul>
-
       </div>
     </nav>
   </div>

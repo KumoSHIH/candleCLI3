@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <loading :active.sync="isLoading" :is-full-page="true">
-            <CandleLoading/>
-        </loading>
-        <Alert/>
-        <Nav/>
-        <router-view></router-view>
-        <Footer/>
-    </div>
+  <div>
+    <loading :active.sync="isLoading" :is-full-page="true">
+        <CandleLoading/>
+    </loading>
+    <Alert/>
+    <Nav/>
+    <router-view></router-view>
+    <Footer/>
+  </div>
 </template>
 
 <script>

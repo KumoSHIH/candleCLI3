@@ -52,63 +52,62 @@
 </template>
 
 <style lang="scss" scoped>
-
-    //login background
-    .loginImg{
-        position: absolute;
-        height: 100vh;
-        width: 100vw;
-        background-image: url('../../assets/images/login2.jpg');
-        background-position: center center;
-        background-size: cover;
-        opacity: .9;
-    }
-    // bs4
+//login background
+  .loginImg{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../assets/images/login2.jpg');
+    background-position: center center;
+    background-size: cover;
+    opacity: .9;
+  }
+  // bs4
+  .nav-item{
+    width: 50%;
+  }
+  .nav-tabs{
+    border-bottom: 0;
     .nav-item{
-      width: 50%;
-    }
-    .nav-tabs{
-        border-bottom: 0;
-        .nav-item{
-            margin-bottom: -2px;
-        }
-        .nav-link{
-            border: 0;
-        }
+      margin-bottom: -2px;
     }
     .nav-link{
-        padding-top: 12px;
-        padding-bottom: 12px;
-        background-color: #574f7d;
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-align: center;
-        transition: .3s;
-        &:hover{
-            color: darken(#fdef96,20%);
-        }
+      border: 0;
     }
-    .nav-link.active{
-        color: #574f7d;
-        background-color: #fff;
-        opacity: 1;
-        &:hover{
-            color: darken(#574f7d,20%);
-        }
+  }
+  .nav-link{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #574f7d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    transition: .3s;
+    &:hover{
+      color: darken(#fdef96,20%);
     }
-    .tab-content{
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+  }
+  .nav-link.active{
+    color: #574f7d;
+    background-color: #fff;
+    opacity: 1;
+    &:hover{
+      color: darken(#574f7d,20%);
     }
-    //
-    label{
-      cursor: pointer;
-    }
-    .shadow{
-      box-shadow: 4px 5px 5px 4px rgba( 0, 0, 0, .8);
-    }
+  }
+  .tab-content{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  //
+  label{
+    cursor: pointer;
+  }
+  .shadow{
+    box-shadow: 4px 5px 5px 4px rgba( 0, 0, 0, .8);
+  }
 </style>
 
 <script>
