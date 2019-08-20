@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/candleCLI3/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/candleCLI3/' : '/'
 }
