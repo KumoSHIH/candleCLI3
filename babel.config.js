@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: '/candleCLI3/'
+  presets: [
+    '@vue/app'
+  ]
 }
