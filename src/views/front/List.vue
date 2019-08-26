@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="jumbotron banner">
+    <loading :active.sync="isLoading" :is-full-page="true">
+        <CandleLoading/>
+    </loading>
+    <div class="banner"></div>
+    <!-- <div class="jumbotron banner">
       <div class="text-right mt-5">
         <h2 class="display-3 text-white d-none d-md-block text-shadow"><strong>炎日”靈魂特賣</strong></h2>
         <h2 class="text-center text-white d-md-none">夏日の靈魂特賣</h2>
@@ -10,7 +14,7 @@
             經由設計師的手工找回最純粹的溫度，提醒我們那個，被遺忘的美好大自然。
         </p>
       </div>
-    </div>
+    </div> -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-10 col-md-4 col-lg-3">
@@ -45,10 +49,9 @@
 
 <style lang="scss" scoped>
   .banner{
-    background: url(../../assets/images/bg3.jpg);
-    background-position: 0 2%;
-    background-size: cover;
-    height: 450px;
+    width: 100%;
+    height: 100vh;
+    background-image: url(../../assets/images/3.jpeg);
   }
   @media (max-width: 768px){
     h2{
@@ -159,7 +162,8 @@ export default {
       }
       return vm.products
     },
-    ...mapGetters('productsModules', ['categories', 'products'])
+    ...mapGetters('productsModules', ['categories', 'products']),
+    ...mapGetters(['isLoading'])
   },
   created () {
     this.getParams()

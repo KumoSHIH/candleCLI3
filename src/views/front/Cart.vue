@@ -1,5 +1,6 @@
 <template>
   <div>
+    <transition :duration="1000"><DarkLoading/></transition>
     <div class="cartWrap container pt-5">
       <div class="row no-gutters">
         <div class="col-md-8 mt-5 no-gutters pr-md-4">

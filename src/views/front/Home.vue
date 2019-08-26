@@ -1,10 +1,22 @@
 <template>
   <div>
-    <Probar/>
+    <transition :duration="1000"><DarkLoading/></transition>
+    <!-- <Probar/> -->
     <a href="#" class="scrollTop text-center animatedJS" id="top">
-      <i class="fas fa-arrow-up"></i>
+      <i class="fas fa-sort-up"></i>
     </a>
-
+    <div class="slidershow-wrap">
+      <vue-displacement-slideshow 
+        :images="images"
+        displacement="require('@/assets/hero2.jpg')" 
+        :intensity="0.2"
+        :speedIn="1.4"
+        :speedOut="1.4"
+        ease="Expo.easeInOut"
+        ref="slideshow">
+      </vue-displacement-slideshow>
+    </div>
+    
     <div class="hero1 row d-flex flex-column justify-content-center align-items-center no-gutters">
       <div class="svgWrap">
         <svg viewBox="0 0 268 31.75">
@@ -106,52 +118,67 @@
           </g>
         </svg>
       </div>
-      <div class="hero1bg"></div>
-      <div class="introTxt text-white">
-        <p class="text-center">品牌介紹：</p>
-        <p class="">我們是一家成立於2018年的手工香氛工作室 canMade，在物質充足的現代，留下一個來自靈魂的溫度吧
-          ！我們希望能像彩虹女神一樣，做為信使，致力於傳遞出優雅又美麗的生活理念。
-          創始人在國外進行了專業的手工香薰蠟燭製作學習，並且擁有香薰蠟燭協會頒發的香薰蠟燭指導師證書
-          ，我們堅持小批量手工製作流程方式，純天然原材料，保持特有的香薰味道和復古的包裝，
-          無論您家中怎樣的裝修風格，canMade 的香薰蠟燭會爲你的家中增添一些溫暖的感覺。
-        </p>
+      <div class="heroTitle">
+
       </div>
-      <div class="text-white hero1Icon animatedJS">
-        <i class="fas fa-angle-double-down fa-2x"></i>
+      <div class="hero1Icon animatedJS">
+        <i class="fas fa-angle-double-down "></i>
       </div>
     </div>
     <div class="hero2 row justify-content-center no-gutters">
       <div class="hero2Txt d-flex flex-column justify-content-center align-items-center">
-        <h2 class="display-4 bg-text-light text-text-main text-center animatedTop"><strong><em>SUMMER SALE</em></strong></h2>
-        <h2 class="display-4 bg-text-light text-text-main text-center animatedTop"><strong><em>全館滿$999享折扣!!</em></strong></h2>
-        <h2 class="display-4 bg-text-light text-text-main text-center animatedTop"><strong><em>當月壽星結帳再95折!!</em></strong></h2>
+        <h2 class="display-4 text-light text-center animatedTop"><strong>SUMMER SALE</strong></h2>
+        <h2 class="display-4 text-light text-center animatedTop">全館滿$999享折扣</h2>
+        <h2 class="display-4 text-light text-center animatedTop">當月壽星結帳再95折</h2>
       </div>
     </div>
 
-    <section class="about row d-flex justify-content-center align-items-center no-gutters">
-      <div class="col-10 col-md-2 text-center mr-md-5 animatedTop">
-        <i class="frame fas fa-hourglass-half"></i>
-        <h2 class="mt-3">時間</h2>
-        <p class="mt-3">香薰蠟燭產品下單後現做，2-6工作天內發貨，預定可備註發貨日期，
-          不接受緊急訂單，若訂單在製作中，不接受退訂，請您諒解。忙碌中若無回覆，請耐心等待，我們將盡快為您服務。</p>
+    <section class="row d-flex justify-content-center my-5 no-gutters">
+      <div class="col-12">
+        <div class="row justify-content-center no-gutters">
+          <a class="recommendWrap col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
+            <span class="recommendTxt text-shadow">夏日慶典</span>
+            <div class="recommendImg bg-cover" style="background-image: url(https://imgur.com/jOSjPYO.jpg);"></div>
+          </a>
+          <a class="recommendWrap col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
+            <span class="recommendTxt text-shadow">最新上架</span>
+            <div class="recommendImg bg-cover" style="background-image: url(https://i.imgur.com/ASWlINS.jpg);"></div>
+          </a>
+          <a class="recommendWrap col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
+            <span class="recommendTxt text-shadow">人氣商品</span>
+            <div class="recommendImg bg-cover" style="background-image: url(https://i.imgur.com/6UhPZwc.jpg);"></div>
+          </a>
+        </div>
       </div>
-      <div class="col-10 col-md-2 text-center mt-4 mt-md-0 mr-md-5 animatedTop">
-        <i class="frame fas fa-leaf"></i>
-        <h2 class="mt-3">純天然</h2>
-        <p class="mt-3">原材料為美國大豆蠟，由大豆製作而成，純天然材料，
-          不會釋放化學物質，燃燒更緩慢，溫和地釋放香味，
-          進口香料不含磷苯二甲酸，香味持久溫和，進口綿燭芯，不含鉛，燃燒更充分。</p>
+    </section>
+
+    <section class="about">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-5 aboutImg about-cover" style="background-image: url(https://i.imgur.com/raOiSop.jpg)"></div>
+        <div class="col-md-5 text-center text-main">
+          <h2>時間</h2>
+          <p class="mt-3">蠟燭產品下單後現做，2-6工作天內發貨。<br>預定可備註發貨日期。</p>
+        </div>
       </div>
-      <div class="col-10 col-md-2  text-center mt-4 mt-md-0 mr-md-5 animatedTop">
-        <i class="frame fab fa-bitbucket"></i>
-        <h2 class="mt-3">產品</h2>
-        <p class="mt-3">蠟燭產品皆為純手工製作，完全一樣是不存在的，也因此有其獨特性
-          ，小氣泡或細節不平整等為正常狀況，不影響使用和美觀，保證每個產品都擁有
-          100%的效果，非質量問提概不退換。</p>
+      <div class="row flex-row-reverse d-flex justify-content-center align-items-center my-5">
+        <div class="col-md-5 aboutImg bg-cover" style="background-image: url(https://i.imgur.com/JDnX5qA.jpg)"></div>
+        <div class="col-md-5 text-center text-main">
+          <h2>純天然</h2>
+          <p class="mt-3">原材料為美國大豆蠟，由大豆製作而成，純天然材料，<br>
+          不會釋放化學物質，燃燒更緩慢，溫和地釋放香味。</p>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-5 aboutImg bg-cover" style="background-image: url(https://i.imgur.com/Eb3g2Bp.jpg)"></div>
+        <div class="col-md-5 text-center text-main">
+          <h2>產品</h2>
+          <p class="mt-3">蠟燭產品皆為純手工製作，完全一樣是不存在的，<br>也因此有其獨特性
+          ，小氣泡或細節不平整等為正常狀況。</p>
+        </div>
       </div>
     </section>
     <section class="hero3 row justify-content-center align-items-center no-gutters">
-      <div class="col-md-6 handMadeWrap d-flex flex-column justify-content-center align-items-center">
+      <div class="col-md-5 handMadeWrap d-flex flex-column justify-content-center align-items-center">
         <div class="col-10 animatedLeft" id="blip2">
           <p>帶上你的情人、朋友，一起來做一個屬於自己香味的蠟燭吧！靜靜地感受心靈的沉靜，
             感受天然低溫大豆蠟的獨特觸感，彷彿洗去一天的疲憊....香氛蠟燭不僅僅是只有照明、香氛舒壓的功用，
@@ -170,7 +197,7 @@
           <button class="btn btn-main" id='click2' @click="btn2">Go back</button>
         </div>
       </div>
-      <div class="col-md-6 hmTxt d-flex flex-column justify-content-center align-items-center ">
+      <div class="col-md-5 hmTxt d-flex flex-column justify-content-center align-items-center ">
         <div class="col-10 handMadeTxt mt-5 text-white animatedRight">
           <h3>精緻手作課程</h3>
           <p>課程中將準備 20 款不同的配方原料，提供學員們自行調配個人專屬香氛蠟燭，讓居家空間更增添幾許優逸氣息，感受生活的慢時尚。</p>
@@ -186,46 +213,29 @@
       </div>
     </section>
 
-    <section class="product row d-flex justify-content-center my-5 no-gutters">
-      <div class="col-12">
-        <div class="row justify-content-center no-gutters">
-          <div class="sale col-10 col-md-3 col-lg-2  mb-4 mb-md-0 mr-md-2 animatedTop">
-            <router-link to="/list" style="text-decoration:none">
-              <div class="inner">
-                <a href="#" class="h1 text-center mt-4 text-shadow">夏日慶典</a>
-                <p>炎熱的夏日，來點降價小確幸解解煩悶吧！</p>
-              </div>
-            </router-link>
-          </div>
-          <div class="new col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
-            <router-link to="/list" style="text-decoration:none">
-              <div class="inner">
-                <a href="#" class="h1 text-center mt-4 text-shadow">最新上架</a>
-                <p>新的心動：夏日的吉野櫻、南法小雛菊、紫色塔克拉</p>
-              </div>
-            </router-link>
-          </div>
-          <div class="hot col-10 col-md-3 col-lg-2 animatedTop">
-            <router-link to="/list" style="text-decoration:none">
-              <div class="inner">
-                <a href="#" class="h1 text-center mt-4 text-shadow">人氣商品</a>
-                <p>特製水果蠟燭。你想讓誰加入成為他們的夥伴呢?</p>
-              </div>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </section>
+    
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
 import anime from 'animejs'
-import Probar from '../../components/Probar'
+import VueDisplacementSlideshow from "vue-displacement-slideshow"
+// import Probar from '../../components/Probar'
 export default {
   components: {
-    Probar
+    VueDisplacementSlideshow
+    // Probar
+  },
+  computed: {
+    images () {
+      return [
+        require("@/assets/images/4.jpeg"),
+        require("@/assets/images/3.jpeg"),
+        require("@/assets/images/8.jpg"),
+        require("@/assets/images/7.jpg")
+      ]
+    }
   },
   methods: {
     btn1 () {
@@ -267,6 +277,11 @@ export default {
         duration: 500,
         translateY: 0
       })
+    },
+    init () {
+      setInterval(() => {
+        this.$refs.slideshow.next()
+      }, 3000)
     }
   },
   created () {
@@ -306,6 +321,9 @@ export default {
         })
       })
     })
+  },
+  mounted () {
+    this.init()
   }
 }
 </script>

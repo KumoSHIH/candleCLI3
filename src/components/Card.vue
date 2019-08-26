@@ -5,12 +5,12 @@
       @click="itemPage(cardItem.id)"
       :style="{ backgroundImage: `url(${cardItem.imageUrl})` }"><div class="mask"></div></div>
       <div class="card-body">
-        <span class="badge badge-pill badge-info float-right p-2">{{cardItem.category}}</span>
+        <span class="badge badge-pill badge-main float-right p-2">{{cardItem.category}}</span>
         <h4 class="card-title"><strong>{{cardItem.title}}</strong></h4>
         <p class="card-text"><small class="text-muted">{{cardItem.content}}</small></p>
       </div>
       <div class="card-footer d-flex justify-content-between align-items-baseline">
-        <div class="price h5">限時優惠 <strong class="text-danger">{{cardItem.price | currency}}</strong></div>
+        <div class="price h6">限時優惠 <strong class="text-danger h5">{{cardItem.price | currency}}</strong></div>
         <button class="btnCart" @click="addCart(cardItem.id,cardItem.qty)"
         ><i class="fas fa-shopping-cart "></i></button>
       </div>
@@ -59,19 +59,13 @@
     border-top: 0;
   }
   .btnCart{
-    width: 40px;
-    height: 40px;
     border: 0;
-    border-radius: 100%;
     color: #574f7d;
-    background-color: #fdef96;
-    font-size: 16px;
-    transition: .5s;
+    background-color: transparent;
+    font-size: 20px;
+    transition: .3s;
     &:hover{
-      //color: darken(#574f7d,10%);
-      //background-color: darken(#fdef96,10%);
-      color: #fff;
-      background-color: #eb5f5d;
+      color: lighten(#574f7d, 20%);
     }
   }
 </style>

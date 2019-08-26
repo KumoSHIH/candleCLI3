@@ -17,6 +17,7 @@ import router from './router'
 import currencyFilter from './filters/currency'
 import dateFilter from './filters/date'
 import CandleLoading from './components/CandleLoading'
+import DarkLoading from './components/DarkLoading'
 import Alert from './components/AlertMessage'
 
 import store from './store'
@@ -30,6 +31,7 @@ Vue.use(VueI18n)
 Vue.component('Alert', Alert)
 Vue.component('Loading', Loading)
 Vue.component('CandleLoading', CandleLoading)
+Vue.component('DarkLoading', DarkLoading)
 Vue.filter('currency', currencyFilter)
 Vue.filter('date', dateFilter)
 
