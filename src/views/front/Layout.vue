@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <loading :active.sync="isLoading" :is-full-page="true">
-        <DarkLoading/>
-    </loading> -->
+    <loading :active.sync="isLoading" :is-full-page="true">
+        <CandleLoading/>
+    </loading>
     
     <Alert/>
     <Nav/>

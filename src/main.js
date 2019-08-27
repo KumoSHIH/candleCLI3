@@ -57,7 +57,6 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
     axios.post(api).then((response) => {
-    // this 在元件下才可以使用(目前在router下) 所以要改用axios
       console.log(response.data)
       if (response.data.success) {
         next()
@@ -67,7 +66,7 @@ router.beforeEach((to, from, next) => {
         })
       }
     })
-  } else { // 不須驗證or已驗證就直接放行
+  } else {
     next()
   }
 })

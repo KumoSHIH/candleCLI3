@@ -6,14 +6,15 @@
       :style="{ backgroundImage: `url(${cardItem.imageUrl})` }"><div class="mask"></div></div>
       <div class="card-body">
         <span class="badge badge-pill badge-main float-right p-2">{{cardItem.category}}</span>
-        <h4 class="card-title"><strong>{{cardItem.title}}</strong></h4>
-        <p class="card-text"><small class="text-muted">{{cardItem.content}}</small></p>
+        <h5 class="card-title">{{cardItem.title}}</h5>
+        <div class="d-flex justify-content-between align-items-baseline mt-3">
+          <h6 class="">NT{{cardItem.price | currency}}</h6>
+          <button class="btnCart" @click="addCart(cardItem.id,cardItem.qty)">
+            <i class="fas fa-shopping-cart "></i>
+          </button>
       </div>
-      <div class="card-footer d-flex justify-content-between align-items-baseline">
-        <div class="price h6">限時優惠 <strong class="text-danger h5">{{cardItem.price | currency}}</strong></div>
-        <button class="btnCart" @click="addCart(cardItem.id,cardItem.qty)"
-        ><i class="fas fa-shopping-cart "></i></button>
       </div>
+      
     </div>
 
   </div>
@@ -21,9 +22,6 @@
 
 <style lang="scss" scoped>
 // card
-  .card{
-    box-shadow: 0px 3px 5px #aaa;
-  }
   .img-top{
     height: 150px;
     background-size: cover;
@@ -53,6 +51,9 @@
     height: 150px;
     background-color: rgba(0,0,0,.5);
     transition: .3s;
+  }
+  .card-body{
+    border: solid 1px #DCDCDC;
   }
   .card-footer{
     background-color: #fff;

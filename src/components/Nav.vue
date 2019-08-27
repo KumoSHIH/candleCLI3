@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="nav row justify-content-between py-5 pr-0 no-gutters">
+    <div class="nav row justify-content-between align-items-center py-4 pr-0 no-gutters">
       <div class="col col-md-2 logo d-flex justify-content-center mt-2 mt-md-0 ml-md-5" >
         <router-link to="/home">
-          <img src="../assets/images/logo_light.png" height="80">
+          <img src="../assets/images/logo_dark.png" height="60">
         </router-link>
       </div>
-      <div class="col-12 col-md-5 col-lg-2 d-flex flex-column mt-2 mt-md-0">
+      <div class="col-12 col-md-6 d-flex justify-content-around mt-2 mt-md-0">
         <li class="nav-item">
           <router-link class="nav-link" to="/list">Products</router-link>
         </li>
@@ -14,12 +14,9 @@
           <router-link class="nav-link" to="/bulletin">The News</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/login">Login</router-link>
-        </li>
-        <li class="nav-item">
           <router-link class="nav-link" to="/cart">
             Shopping Cart
-            <div class="badge badge-light">{{ cartLength }}</div>
+            <div class="badge badge-main">{{ cartLength }}</div>
           </router-link>
         </li>
         <li class="nav-item">
@@ -43,9 +40,9 @@
     text-decoration: none;
     font-size: 18px;
     letter-spacing: 1.5px;
-    color: #fff;
+    color: #000;
     &:hover{
-      color: #DCDCDC
+      color: lighten(#000, 30%);
     }
   }
 </style>

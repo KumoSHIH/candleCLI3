@@ -22,15 +22,15 @@ export default new Router({
     },
     {
       path: '/',
+      name: 'Home',
+      component: () => import('./views/front/Home.vue')
+    },
+    {
+      path: '/',
       name: 'Layout',
       component: () => import('./views/front/Layout.vue'),
       children:
       [
-        {
-          path: '/',
-          name: 'Home',
-          component: () => import('./views/front/Home.vue')
-        },
         {
           path: 'list',
           name: 'List',
@@ -67,11 +67,6 @@ export default new Router({
           component: () => import('./views/front/Bulletin.vue')
         }
       ]
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: () => import('./views/front/Login.vue')
     },
     {
       path: '/controller',

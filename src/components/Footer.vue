@@ -12,7 +12,7 @@
           <h6>顧客服務</h6>
           <router-link to="/bulletin#service">運送方式</router-link>
           <router-link to="/bulletin#service">付款方式</router-link>
-          <router-link to="/bulletin#service">優惠招募</router-link>
+          <router-link to="/bulletin#service">優惠訊息</router-link>
         </div>
         <div class="col-md-4 text-center mt-5">
           <h6>聯絡我們</h6>

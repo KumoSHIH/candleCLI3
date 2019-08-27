@@ -1,5 +1,22 @@
 @import './_font';
-
+// Nav
+.nav{
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+}
+.nav-item{
+  padding: 5px 0;
+}
+.nav-item a{
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: #fff;
+  &:hover{
+    color: #DCDCDC
+  }
+}
 // svg
 .st0{fill:#fff;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;} 
 .svgWrap{
@@ -119,44 +136,12 @@
   }
   
 }
-
-//hero 1
-// .hero1bg{
-//   position: absolute;
-//   width: 400px;
-//   height: 350px;
-//   margin-top: 40px;
-//   z-index: 1;
-//   background-color: rgba(0,0,0,.3); 
-//   opacity: 0;
-//   transform: translateY(100%);
-
-//   animation: intro 2s forwards;
-//   animation-delay: 1s;
-// }
-
-// .introTxt{
-//   width: 300px;
-//   margin-top: 100px;
-//   letter-spacing: 1.5px;
-//   z-index: 10;
-//   opacity: 0;
-//   transform: translateY(80%);
-
-//   animation: intro 1.5s forwards;
-//   animation-delay: 1.8s;
-
-// }
-// @keyframes intro{
-//   to{
-//     opacity: 1;
-//     transform: translateY(0); 
-//   }
-// }
-
 .hero1Icon{
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
+  z-index: 10;
+  color: #fff;
+  font-size: 26px;
 }
 @media (max-width: 320px){
   .hero1{
@@ -225,9 +210,6 @@
   position: relative;
   width: auto;
   height: 100vh;
-  // position: relative;
-  // width: 100vw;
-  // height: 100vh;
 }
 //hero2 parallax
 .hero2{ 
@@ -268,7 +250,52 @@
     margin-top: 20px;
   }
 }
-
+//recommend
+.bg-cover{
+  background-size: cover;
+  background-position: 0 30%;
+}  
+.recommendWrap{
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+}
+.recommendWrap:hover .recommendImg{
+  transform: scale(1.1,1.1);
+  opacity: .8;
+}
+.recommendTxt{
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+.recommendImg{
+  height: 150px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -2;
+  transition: .5s;
+}
+.text-shadow{
+  text-shadow: 0px 5px 6px rgba(0,0,0,.5);
+}
+.letterspacing{
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+}
+.frame{
+  width: 100px;
+  height: 100px;
+  border: solid 3px;
+  border-radius: 99%;
+  font-size: 50px;
+  padding: 20px 0;
+}
 //about
 .about{
   margin: 80px 0;
@@ -290,20 +317,18 @@
   height: 500px;
 }
 
-//hero3
+//class
+.hero3{
+  margin-bottom: 150px;
+}
 .handMadeWrap{
-  height: 600px;
+  height: 500px;
   background: url(./assets/images/p5.jpg);
-  background-size: cover;
   background-position: center center;
-  overflow: hidden;
   .bntHand{
-    height: 50px;
+    height: 45px;
     box-shadow: 0px 3px 5px rgba(0,0,0,.3);
     margin-top: 50px;
-    margin-left: 45%;
-    transform: translateX(-45%);
-
     color: #fff;
     font-weight: bold;
     transition: .5s;
@@ -313,7 +338,7 @@
     font-weight: bold;
     letter-spacing: 2px;
     padding: 10px;
-    margin-top: 120px;
+    margin-top: 100px;
   }
   p:first-letter{
     font-size: 28px;
@@ -321,8 +346,7 @@
   ul,li{
     list-style: none;
   }
-  h3{
-    border: solid 2px #574f7d;
+  h2{
     display: inline-flex;
     padding: 10px 15px;
     font-weight: bold;
@@ -330,17 +354,17 @@
   }
   #blip{
     position: absolute;
-    top: 80px;
+    top: 30px;
     opacity: 0;
     width: 60%;
-    transform: translateY(-800px);
+    transform: translateY(-1000px);
     li{
       letter-spacing: 1.5px;
       text-shadow: 0px 3px 5px rgba(0,0,0,.3);
     }
     ul{
-      background-color: rgba(149, 173, 190, .7);
-      padding: 20px 0;
+      background-color: rgba(#fff, .6);
+      padding: 30px 0;
       margin-top: 20px;
     }
   }
@@ -378,52 +402,13 @@
   }
 }
 .hmTxt{
+  height: 500px;
   background-color: $main;
   overflow: hidden;
-  .handMadeTxt,.rightTxt{
+  .rightTxt{
     opacity: 1;
     animation-delay: 2s;
   }
-  h3{
-    border: solid 2px #fff;
-    display: inline-flex;
-    padding: 10px 15px;
-  }
-}
-
-//product
-.bg-cover{
-  background-size: cover;
-  background-position: 0 30%;
-}  
-.recommendWrap{
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  z-index: 2;
-}
-.recommendWrap:hover .recommendImg{
-  transform: scale(1.1,1.1);
-  opacity: .9;
-}
-.recommendTxt{
-  font-size: 32px;
-  letter-spacing: 2px;
-  color: #fff;
-}
-.recommendImg{
-  height: 150px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  z-index: -2;
-  transition: .5s;
-}
-.text-shadow{
-  text-shadow: 0px 5px 6px rgba(0,0,0,.5);
 }
 
 //animated

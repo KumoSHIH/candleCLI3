@@ -1,14 +1,37 @@
 <template>
   <div>
     <transition :duration="1000"><DarkLoading/></transition>
-    <!-- <Probar/> -->
+    <div class="nav row justify-content-between py-5 pr-0 no-gutters">
+      <div class="col col-md-2 logo d-flex justify-content-center mt-2 mt-md-0 ml-md-5" >
+        <router-link to="/home">
+          <img src="../../assets/images/logo_light.png" height="80">
+        </router-link>
+      </div>
+      <div class="col-12 col-md-5 col-lg-2 d-flex flex-column mt-2 mt-md-0">
+        <li class="nav-item">
+          <router-link class="nav-link" to="/list">Products</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/bulletin">The News</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/cart">
+            Shopping Cart
+            <div class="badge badge-light">{{ cartLength }}</div>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/controller">Controller</router-link>
+        </li>
+      </div>
+    </div>
     <a href="#" class="scrollTop text-center animatedJS" id="top">
       <i class="fas fa-sort-up"></i>
     </a>
     <div class="slidershow-wrap">
-      <vue-displacement-slideshow 
+      <vue-displacement-slideshow
         :images="images"
-        displacement="require('@/assets/hero2.jpg')" 
+        displacement="require('@/assets/hero2.jpg')"
         :intensity="0.2"
         :speedIn="1.4"
         :speedOut="1.4"
@@ -16,7 +39,6 @@
         ref="slideshow">
       </vue-displacement-slideshow>
     </div>
-    
     <div class="hero1 row d-flex flex-column justify-content-center align-items-center no-gutters">
       <div class="svgWrap">
         <svg viewBox="0 0 268 31.75">
@@ -118,9 +140,6 @@
           </g>
         </svg>
       </div>
-      <div class="heroTitle">
-
-      </div>
       <div class="hero1Icon animatedJS">
         <i class="fas fa-angle-double-down "></i>
       </div>
@@ -132,9 +151,8 @@
         <h2 class="display-4 text-light text-center animatedTop">當月壽星結帳再95折</h2>
       </div>
     </div>
-
     <section class="row d-flex justify-content-center my-5 no-gutters">
-      <div class="col-12">
+      <div class="col-12 mt-4">
         <div class="row justify-content-center no-gutters">
           <a class="recommendWrap col-10 col-md-3 col-lg-2 mb-4 mb-md-0 mr-md-2 animatedTop">
             <span class="recommendTxt text-shadow">夏日慶典</span>
@@ -151,26 +169,36 @@
         </div>
       </div>
     </section>
-
+    <div class="container">
+      <hr>
+      <div class="row d-flex justify-content-center mt-5">
+        <h5 class="col-9 col-md-8 text-center my-4 letterspacing animatedTop"><strong>帶上你的情人、朋友，選一個屬於自己香味的蠟燭吧！<br>
+          靜靜地感受心靈的沉靜，天然大豆蠟的獨特觸感，彷彿洗去一天的疲憊....</strong>
+        </h5>
+      </div>
+    </div>
     <section class="about">
-      <div class="row d-flex justify-content-center align-items-center">
+      <div class="row d-flex justify-content-center align-items-center no-gutters">
         <div class="col-md-5 aboutImg about-cover" style="background-image: url(https://i.imgur.com/raOiSop.jpg)"></div>
-        <div class="col-md-5 text-center text-main">
+        <div class="col-md-5 text-center text-main animatedLeft">
+          <i class="frame fas fa-hourglass-half mb-1"></i>
           <h2>時間</h2>
           <p class="mt-3">蠟燭產品下單後現做，2-6工作天內發貨。<br>預定可備註發貨日期。</p>
         </div>
       </div>
-      <div class="row flex-row-reverse d-flex justify-content-center align-items-center my-5">
+      <div class="row flex-row-reverse d-flex justify-content-center align-items-center my-5 no-gutters">
         <div class="col-md-5 aboutImg bg-cover" style="background-image: url(https://i.imgur.com/JDnX5qA.jpg)"></div>
-        <div class="col-md-5 text-center text-main">
+        <div class="col-md-5 text-center text-main animatedLeft">
+          <i class="frame fas fa-leaf mb-1"></i>
           <h2>純天然</h2>
           <p class="mt-3">原材料為美國大豆蠟，由大豆製作而成，純天然材料，<br>
           不會釋放化學物質，燃燒更緩慢，溫和地釋放香味。</p>
         </div>
       </div>
-      <div class="row d-flex justify-content-center align-items-center">
+      <div class="row d-flex justify-content-center align-items-center no-gutters">
         <div class="col-md-5 aboutImg bg-cover" style="background-image: url(https://i.imgur.com/Eb3g2Bp.jpg)"></div>
-        <div class="col-md-5 text-center text-main">
+        <div class="col-md-5 text-center text-main animatedLeft">
+          <i class="frame fab fa-bitbucket mb-1"></i>
           <h2>產品</h2>
           <p class="mt-3">蠟燭產品皆為純手工製作，完全一樣是不存在的，<br>也因此有其獨特性
           ，小氣泡或細節不平整等為正常狀況。</p>
@@ -178,66 +206,67 @@
       </div>
     </section>
     <section class="hero3 row justify-content-center align-items-center no-gutters">
-      <div class="col-md-5 handMadeWrap d-flex flex-column justify-content-center align-items-center">
-        <div class="col-10 animatedLeft" id="blip2">
-          <p>帶上你的情人、朋友，一起來做一個屬於自己香味的蠟燭吧！靜靜地感受心靈的沉靜，
-            感受天然低溫大豆蠟的獨特觸感，彷彿洗去一天的疲憊....香氛蠟燭不僅僅是只有照明、香氛舒壓的功用，
-            它也是一個家飾、一種生活品味的呈現。等你來一起體驗它的獨特魅力！
+      <div class="col-md-5 handMadeWrap d-flex  justify-content-center align-items-center">
+        <div class="col-10 text-center animatedTop" id="blip2">
+          <p>課程中將準備 20 款不同的配方原料，提供學員們自行調配個人專屬香氛蠟燭，
+            讓居家空間更增添幾許優逸氣息，感受生活的慢時尚。
           </p>
-          <button class="btn btn-main bntHand" id='click1' @click="btn1">場次報名</button>
+          <button class="btn btn-main bntHand" id='click1' @click="btn1">課程場次</button>
         </div>
         <div class="col-12 col-lg-10 text-center" id="blip">
-          <h3 class="text-main my-2"><i class="far fa-lightbulb mr-2"></i>場次報名</h3>
-            <ul>
-              <li class="mb-1">2019/08/03 <i class="fas fa-glass-whiskey ml-2 mr-1"></i>經典大豆蠟燭 $1,000</li>
-              <li class="mb-1">2019/08/04 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
-              <li class="mb-1">2019/08/10 <i class="fas fa-pepper-hot ml-2 mr-1"></i>水果大豆蠟燭 $1,500</li>
-              <li >2019/08/11 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
-            </ul>
+          <ul>
+            <h2 class="my-1"><i class="far fa-lightbulb mr-2"></i>場次報名</h2>
+            <li class="mb-1">2019/08/03 <i class="fas fa-glass-whiskey ml-2 mr-1"></i>經典大豆蠟燭 $1,000</li>
+            <li class="mb-1">2019/08/04 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
+            <li class="mb-1">2019/08/10 <i class="fas fa-pepper-hot ml-2 mr-1"></i>水果大豆蠟燭 $1,500</li>
+            <li >2019/08/11 <i class="fab fa-pagelines ml-2 mr-2"></i>花草大豆蠟燭 $1,300</li>
+          </ul>
           <button class="btn btn-main" id='click2' @click="btn2">Go back</button>
         </div>
       </div>
-      <div class="col-md-5 hmTxt d-flex flex-column justify-content-center align-items-center ">
-        <div class="col-10 handMadeTxt mt-5 text-white animatedRight">
-          <h3>精緻手作課程</h3>
-          <p>課程中將準備 20 款不同的配方原料，提供學員們自行調配個人專屬香氛蠟燭，讓居家空間更增添幾許優逸氣息，感受生活的慢時尚。</p>
-        </div>
-        <div class="col-10 rightTxt my-5 text-white animatedRight">
-          <h3>課程介紹</h3>
+      <div class="col-md-5 hmTxt d-flex justify-content-center align-items-center">
+        <div class="col-10 rightTxt my-5 text-white letterspacing animatedTop">
+          <h3 class="text-center mb-4">手作課程</h3>
           <li>NT$1000起。費用含手作體驗：20 種配方原料、手工玻璃容器（直徑 9 x 7.5cm，270ml）、包材、現場工具使用。</li>
           <li>專業設計師一起創作，親自製作屬於你且獨一無二的作品。</li>
-          <li>請遵守活動場地規則及配合現場講師指示，若有違反因而造成損害，自行負責。</li>
           <li>活動前 15 分鐘開放入場，為了讓體驗活動順利進行，遲到超過 30 分鐘即無法入場，視同放棄課程，概不退款。</li>
           <li>活動將依需求進行側拍，如不希望被攝影，可以於活動現場告知工作人員。</li>
         </div>
       </div>
     </section>
-
-    
+    <Footer/>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
 import anime from 'animejs'
-import VueDisplacementSlideshow from "vue-displacement-slideshow"
-// import Probar from '../../components/Probar'
+import VueDisplacementSlideshow from 'vue-displacement-slideshow'
+import Footer from '@/components/Footer'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
-    VueDisplacementSlideshow
-    // Probar
+    VueDisplacementSlideshow,
+    Footer
+  },
+  data () {
+    return {
+      message: {}
+    }
   },
   computed: {
+    ...mapGetters('cartModules', ['cart', 'cartLength']),
     images () {
       return [
-        require("@/assets/images/4.jpeg"),
-        require("@/assets/images/3.jpeg"),
-        require("@/assets/images/8.jpg"),
-        require("@/assets/images/7.jpg")
+        require('@/assets/images/4.jpeg'),
+        require('@/assets/images/3.jpeg'),
+        require('@/assets/images/8.jpg'),
+        require('@/assets/images/7.jpg')
       ]
     }
   },
   methods: {
+    ...mapActions('cartModules', ['getCart']),
     btn1 () {
       anime({
         targets: '#blip',
@@ -285,6 +314,7 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('cartModules/getCart')
     $(document).ready(function () {
       $('#top').click(function (e) {
         e.preventDefault()
@@ -327,3 +357,5 @@ export default {
   }
 }
 </script>
+
+

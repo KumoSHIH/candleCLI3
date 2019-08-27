@@ -31,9 +31,7 @@
   position: absolute;
   height: 100vh;
   width: 100vw;
-  background-image: url('../../assets/images/bg4.jpg');
-  background-position: 40% 20%;
-  background-size: cover;
+  background-color: lighten(#95adbe, 25%);
 }
 .shadow{
   box-shadow: 4px 5px 5px 4px rgba( 0, 0, 0, .8);

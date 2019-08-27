@@ -1,27 +1,13 @@
 <template>
-  <div>
+  <div class="listWrap">
     <loading :active.sync="isLoading" :is-full-page="true">
         <CandleLoading/>
     </loading>
     <div class="banner"></div>
-    <!-- <div class="jumbotron banner">
-      <div class="text-right mt-5">
-        <h2 class="display-3 text-white d-none d-md-block text-shadow"><strong>炎日”靈魂特賣</strong></h2>
-        <h2 class="text-center text-white d-md-none">夏日の靈魂特賣</h2>
-        <h4 class="d-inline-block text-main bg-text-main p-2 mt-2"><strong>單筆消費滿999(含)以上，9折優惠 / 1399(含)以上，8折優惠 !!</strong></h4>
-        <p class="d-none d-md-block mt-4 text-white text-shadow">西元前三千年的古埃及，世界上第一支蠟燭出現，在人類生活中扮演重要的照明角色，直至愛迪生發明燈泡。<br>
-            天然植物香氛加入創意去滿足想像， 賦予蠟燭更多重的感官享受，如甜點般的療癒視覺、嗅覺與心靈。<br>
-            經由設計師的手工找回最純粹的溫度，提醒我們那個，被遺忘的美好大自然。
-        </p>
-      </div>
-    </div> -->
-    <div class="container">
+    <div class="container mt-4">
       <div class="row justify-content-center">
-        <div class="col-10 col-md-4 col-lg-3">
-          <ul>
-            <li>
-              <a href="#" class="list text-white">產品列表</a>
-            </li>
+        <div class="col-10">
+          <ul class="d-flex justify-content-around">
             <li>
               <a href="#" class="list list-item"
               @click.prevent="listItem = ''"
@@ -35,7 +21,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-8 col-lg-9">
+        <div class="col-md-10">
           <div class="form-row justify-content-center justify-content-md-start mt-4 mt-md-0 mb-4">
             <div class="col-10 col-md-4 mb-4 mb-md-0" v-for="item in filterData" :key="item.id">
               <Card :card-item="item" />
@@ -48,10 +34,12 @@
 </template>
 
 <style lang="scss" scoped>
+.listWrap{
+  min-height: calc(100vh - 280px);
+}
   .banner{
     width: 100%;
-    height: 100vh;
-    background-image: url(../../assets/images/3.jpeg);
+    height: 130px;
   }
   @media (max-width: 768px){
     h2{
@@ -81,17 +69,17 @@
     top: 70px;
     list-style: none;
     padding: 0;
-    border: solid 1px #574f7d;
+    border: solid 1px #DCDCDC;
   }
   ul:last-of-type{
-    border-bottom: 0;
+    //border-bottom: 0;
   }
   li:first-child{
-    background-color: #574f7d;
+    //background-color: #574f7d;
   }
   .list{
     display: block;
-    padding: 10px 0;
+    padding: 10px 40px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
@@ -100,18 +88,18 @@
   }
   .list-item{
     color: #000;
-    border-bottom: solid 1px #574f7d;
+    //border-bottom: solid 1px #574f7d;
     cursor: pointer;
     transition: .2s;
     &:hover,&:active{
-      background-color: #95adbe;
+      background-color: lighten(#95adbe, 10%);
       color: #574f7d;
     }
   }
   .active{
-    background-color: #95adbe;
+    background-color: lighten(#95adbe, 10%);
     color: #fff;
-    border-bottom: solid 0.5px #574f7d;
+    //border-bottom: solid 0.5px #574f7d;
   }
 // pagination bs4
   .page-link{
@@ -125,7 +113,7 @@
     border-radius: 0;
   }
   .activePage{
-    background-color: #574f7d;
+    //background-color: #574f7d;
     color: #fff;
   }
 </style>

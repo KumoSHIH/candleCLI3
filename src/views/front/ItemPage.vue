@@ -8,7 +8,7 @@
             <div class="d-md-none">
               <h2 class="mt-4 mt-md-0 text-center text-md-left"><strong>{{ product.title }}</strong></h2>
             </div>
-            <h5 class="text-info"><strong>商品介紹</strong></h5>
+            <h5 class="text-main"><strong>商品介紹</strong></h5>
             <hr>
             <p>{{ product.content }}</p>
             <p>香氛調性<br>{{ product.description }}</p>
@@ -26,7 +26,7 @@
         <div class="col-12 col-md-6 col-lg-5">
           <h2 class="mt-4 mt-md-0 text-center text-md-left"><strong>{{ product.title }}</strong></h2>
           <div class="text-center text-md-left">
-            <span class="h3 text-info"><strong>NT {{ product.price | currency }}</strong></span>
+            <span class="h3 text-main"><strong>NT {{ product.price | currency }}</strong></span>
             <span class="h5 text-secondary ml-2"><del>NT {{ product.origin_price | currency }}</del></span>
           </div>
           <div class=" mt-3 text-center text-md-left">
@@ -50,13 +50,13 @@
           <p class="text-center text-md-left ">統一發票中獎另會通知並寄送紙本發票</p>
           <hr>
           <div class="text-center text-md-left ">
-            <h5 class="text-info"><strong>優惠活動</strong></h5>
-            <li class="text-text-light"><i class="fas fa-sun mr-2"></i>新加入會員首次購物享95折</li>
-            <li class="text-text-light"><i class="fas fa-sun mr-2"></i>當月壽星結帳可折扣NT$50</li>
+            <h5 class="text-main"><strong>優惠活動</strong></h5>
+            <li><i class="fas fa-sun mr-2"></i>新加入會員首次購物享95折</li>
+            <li><i class="fas fa-sun mr-2"></i>當月壽星結帳可折扣NT$50</li>
           </div>
           <hr>
           <div>
-            <h5 class="text-center text-md-left text-info"><strong>商品資訊</strong></h5>
+            <h5 class="text-center text-md-left text-main"><strong>商品資訊</strong></h5>
             <table class="table">
               <tr>
                 <th width="10%">商品材質</th>
