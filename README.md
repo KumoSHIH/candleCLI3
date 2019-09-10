@@ -2,7 +2,7 @@
 [![image.jpg](https://i.postimg.cc/PqwtrGVk/candle000.jpg)](https://postimg.cc/xk9rtZSs)
 
 ## Demo
-https://kumoshih.github.io/cnadleCLI3/#
+https://kumoshih.github.io/cnadleCLI3/#/
 
 ## Introduction
 <ul>
